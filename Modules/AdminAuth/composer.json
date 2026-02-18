@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/adminauth",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\AdminAuth\\": "app/",
+            "Modules\\AdminAuth\\Database\\Factories\\": "database/factories/",
+            "Modules\\AdminAuth\\Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "Modules/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\AdminAuth\\Tests\\": "tests/"
+        }
+    }
+}

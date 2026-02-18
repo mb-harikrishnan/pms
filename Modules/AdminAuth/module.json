@@ -1,0 +1,11 @@
+{
+    "name": "AdminAuth",
+    "alias": "adminauth",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AdminAuth\\app\\Providers\\AdminAuthServiceProvider"
+    ],
+    "files": []
+}
