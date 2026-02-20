@@ -5,15 +5,10 @@
 <title>Admin Panel | Premium Accounting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="icon" href="" sizes="any" />
-    <link rel="icon" href="https://trademos.net/assets/images/faviconnew.png" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="https://trademos.net/assets/images/faviconnew.png" />
-    
+<link rel="icon" href="https://trademos.net/assets/images/faviconnew.png" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="https://trademos.net/assets/images/faviconnew.png" />
 
 <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
-
-
-
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -80,20 +75,12 @@
     }
 
     .brand-box {
-        height: 70px;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-bottom: 1px solid var(--border-color);
         background: linear-gradient(to right, rgba(212, 175, 55, 0.05), transparent);
-    }
-
-    .brand-box h2 {
-        font-family: 'Cinzel', serif;
-        font-size: 20px;
-        color: var(--primary-gold);
-        letter-spacing: 2px;
-        text-transform: uppercase;
     }
 
     .sidebar-menu {
@@ -121,10 +108,23 @@
         cursor: pointer;
     }
 
-    .menu-link:hover, .menu-link.active {
-        background: var(--hover-bg);
+    /* Creative Active State */
+    .menu-link:hover {
+        background: rgba(255, 255, 255, 0.03);
         color: var(--primary-gold);
-        border-left-color: var(--primary-gold);
+    }
+
+    .menu-link.active {
+        background: linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.05) 100%);
+        color: #fff;
+        border-left: 3px solid var(--primary-gold);
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        box-shadow: 0 4px 15px -3px rgba(212, 175, 55, 0.2);
+    }
+
+    .menu-link.active .menu-icon {
+        color: var(--primary-gold);
+        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6));
     }
 
     .link-content {
@@ -308,13 +308,13 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="brand-box">
-       <img style="width: 150px;" src="https://trademos.net/dist_assets/img/favicon/favlogoNew.png" alt="">
+       <img style="width: 150px;" src="https://trademos.net/dist_assets/img/favicon/favlogoNew.png" alt="TradeMos">
     </div>
     
     <ul class="sidebar-menu">
 
         <li class="menu-item">
-            <a href="{{ route('staff.dashboard') }}" class="menu-link">
+            <a href="{{ route('staff.dashboard') }}" class="menu-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
                 <div class="link-content">
                     <i class="ri-dashboard-3-line menu-icon"></i>
                     <span>Dashboard</span>
@@ -322,7 +322,7 @@
             </a>
         </li>
 
-        <li class="menu-item has-submenu">
+        <li class="menu-item has-submenu {{ request()->routeIs('staff.add_employee') || request()->routeIs('staff.employee_list') ? 'open' : '' }}">
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-user-star-line menu-icon"></i>
@@ -331,12 +331,12 @@
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
             <ul class="submenu">
-                <li><a href="{{route('staff.add_employee')}}">Add Employee</a></li>
-                <li><a href="{{ route('staff.employee_list') }}">Employee List</a></li>
+                <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
+                <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a></li>
             </ul>
         </li>
 
-        <li class="menu-item has-submenu">
+        <li class="menu-item has-submenu {{ request()->routeIs('accounts.request_form') || request()->routeIs('accounts.request_list') ? 'open' : '' }}">
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-briefcase-4-line menu-icon"></i>
@@ -345,12 +345,12 @@
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
             <ul class="submenu">
-                <li><a href="{{route('accounts.request_form')}}">Request Form</a></li>
-                <li><a href="{{route('accounts.request_list')}}">Request List</a></li>
+                <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
+                <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Request List</a></li>
             </ul>
         </li>
 
-        <li class="menu-item has-submenu">
+        <li class="menu-item has-submenu {{ request()->routeIs('accounts.expence_form') || request()->routeIs('accounts.expence_list') ? 'open' : '' }}">
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-money-dollar-circle-line menu-icon"></i>
@@ -359,12 +359,12 @@
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
             <ul class="submenu">
-                <li><a href="{{route('accounts.expence_form')}}">Expense Form</a></li>
-                <li><a href="{{route('accounts.expence_list')}}">Expense List</a></li>
+                <li><a href="{{route('accounts.expence_form')}}" class="{{ request()->routeIs('accounts.expence_form') ? 'active' : '' }}">Expense Form</a></li>
+                <li><a href="{{route('accounts.expence_list')}}" class="{{ request()->routeIs('accounts.expence_list') ? 'active' : '' }}">Expense List</a></li>
             </ul>
         </li>
 
-        <li class="menu-item has-submenu">
+        <li class="menu-item has-submenu {{ request()->routeIs('accounts.wallet_request_form') || request()->routeIs('accounts.wallet_request_list') ? 'open' : '' }}">
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-wallet-3-line menu-icon"></i>
@@ -373,8 +373,8 @@
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
             <ul class="submenu">
-                <li><a href="{{route('accounts.wallet_request_form')}}">Wallet Request Form</a></li>
-                <li><a href="{{route('accounts.wallet_request_list')}}">Wallet Request List</a></li>
+                <li><a href="{{route('accounts.wallet_request_form')}}" class="{{ request()->routeIs('accounts.wallet_request_form') ? 'active' : '' }}">Wallet Request Form</a></li>
+                <li><a href="{{route('accounts.wallet_request_list')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Wallet Request List</a></li>
             </ul>
         </li>
 
@@ -408,13 +408,15 @@
     </div>
 </div>
 
+
+
 <script>
     // Submenu Toggle
     function toggleSubmenu(element) {
         const parent = element.parentElement;
         const wasOpen = parent.classList.contains('open');
 
-        // Close all other open submenus (optional, keep if you want accordion style)
+        // Close all other open submenus
         document.querySelectorAll('.menu-item.has-submenu').forEach(item => {
             item.classList.remove('open');
         });
@@ -435,3 +437,5 @@
     }
 </script>
 
+</body>
+</html>
