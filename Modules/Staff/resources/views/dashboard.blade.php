@@ -130,6 +130,7 @@
     margin-top: 60px;
     padding: 30px;
     width: calc(100% - 240px);
+      background: radial-gradient(circle at top left, #1a1a1d, #09090b);
 }
 
 
@@ -149,7 +150,7 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
-  background: radial-gradient(circle at top left, #1a1a1d, #09090b);
+
 }
 
 /* Welcome Banner */
