@@ -91,24 +91,7 @@
         </div>
 
         <!-- System Status -->
-        <div class="grid-card h-slide-up" style="animation-delay: 0.5s;">
-             <div class="card-header">
-                <h3><i class="ri-server-line"></i> System Status</h3>
-                <span class="status-indicator online">Online</span>
-            </div>
-            <div class="server-stats">
-                <div class="stat-row">
-                    <span>Server Load</span>
-                    <div class="progress-bar"><div class="fill" style="width: 25%"></div></div>
-                    <span class="val">25%</span>
-                </div>
-                <div class="stat-row">
-                    <span>Database</span>
-                    <div class="progress-bar"><div class="fill green" style="width: 98%"></div></div>
-                    <span class="val">Healthy</span>
-                </div>
-            </div>
-        </div>
+
 
     </div>
 
