@@ -256,6 +256,10 @@
                 width: 90%;
                 padding: 50px 20px;
             }
+
+            .gold-orb,.gold-orb-2{
+                display: none;
+            }
         }
 
     </style>
