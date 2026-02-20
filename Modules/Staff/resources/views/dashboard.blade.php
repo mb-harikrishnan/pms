@@ -125,6 +125,15 @@
 .h-fade-in { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .h-slide-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
+.main-content {
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 30px;
+    width: calc(100% - 240px);
+}
+
+
+
 /* Main Content Wrapper */
 .content-wrapper {
   max-width: 1200px;
