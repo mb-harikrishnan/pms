@@ -1,27 +1,23 @@
 <?php
 
-namespace Modules\AdminAuth\app\Providers;
-
-
+namespace Modules\Staff\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Modules\Staff\Providers\EventServiceProvider;
+use Modules\Staff\Providers\RouteServiceProvider;
 
 
-use Modules\AdminAuth\app\Providers\EventServiceProvider;
-use Modules\AdminAuth\app\Providers\RouteServiceProvider;
-
-
-class AdminAuthServiceProvider extends ServiceProvider
+class StaffServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
-    protected string $name = 'AdminAuth';
+    protected string $name = 'Staff';
 
-    protected string $nameLower = 'adminauth';
+    protected string $nameLower = 'staff';
 
     /**
      * Boot the application events.
@@ -33,13 +29,7 @@ class AdminAuthServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        // $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        $this->app['router']->aliasMiddleware(
-            'admin.auth',
-            \Modules\AdminAuth\App\Http\Middleware\AdminAuthMiddleware::class
-        );
+        $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
     }
 
     /**

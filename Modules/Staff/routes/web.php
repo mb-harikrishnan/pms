@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Staff\App\Http\Controllers\StaffController;
+use Modules\Staff\Http\Controllers\StaffController;
 
 // Route::middleware(['nocache', 'nocache'])->group(function () {
 Route::middleware(['admin.auth','prevent-back-history'])->group(function () {      

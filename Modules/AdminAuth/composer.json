@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\AdminAuth\\": "app/",
+            "Modules\\AdminAuth\\": "",
             "Modules\\AdminAuth\\Database\\Factories\\": "database/factories/",
             "Modules\\AdminAuth\\Database\\Seeders\\": "database/seeders/",
             "Modules\\": "Modules/"

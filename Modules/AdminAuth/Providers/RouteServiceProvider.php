@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\AdminAuth\app\Providers;
+namespace Modules\AdminAuth\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->app['router']->aliasMiddleware(
             'prevent-back-history',
-            \Modules\AdminAuth\App\Http\Middleware\PreventBackHistory::class
+            \Modules\AdminAuth\Http\Middleware\PreventBackHistory::class
         );
     }
 

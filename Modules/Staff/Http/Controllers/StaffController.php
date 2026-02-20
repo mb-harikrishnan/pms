@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Staff\App\Http\Controllers;
+namespace Modules\Staff\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Modules\Staff\App\Models\Employee;
+use Modules\Staff\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Accounts\app\Http\Controllers;
+namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Modules\Accounts\app\Models\Account;
+use Modules\Accounts\Models\Account;
 use Illuminate\Support\Facades\DB;
 
 class AccountsController extends Controller

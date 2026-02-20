@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\AdminAuth\app\Providers;
+namespace Modules\AdminAuth\Providers;
 
 
 
@@ -11,8 +11,8 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 
-use Modules\AdminAuth\app\Providers\EventServiceProvider;
-use Modules\AdminAuth\app\Providers\RouteServiceProvider;
+use Modules\AdminAuth\Providers\EventServiceProvider;
+use Modules\AdminAuth\Providers\RouteServiceProvider;
 
 
 class AdminAuthServiceProvider extends ServiceProvider
@@ -38,7 +38,7 @@ class AdminAuthServiceProvider extends ServiceProvider
 
         $this->app['router']->aliasMiddleware(
             'admin.auth',
-            \Modules\AdminAuth\App\Http\Middleware\AdminAuthMiddleware::class
+            \Modules\AdminAuth\Http\Middleware\AdminAuthMiddleware::class
         );
     }
 

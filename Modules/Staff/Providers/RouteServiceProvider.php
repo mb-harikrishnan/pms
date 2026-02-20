@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\AdminAuth\app\Providers;
+namespace Modules\Staff\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    protected string $name = 'AdminAuth';
+    protected string $name = 'Staff';
 
     /**
      * Called before routes are registered.
@@ -17,11 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         parent::boot();
-
-        $this->app['router']->aliasMiddleware(
-            'prevent-back-history',
-            \Modules\AdminAuth\App\Http\Middleware\PreventBackHistory::class
-        );
     }
 
     /**
@@ -52,7 +47,4 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('api')->prefix('api')->name('api.')->group(module_path($this->name, '/routes/api.php'));
     }
-
-
-    
 }

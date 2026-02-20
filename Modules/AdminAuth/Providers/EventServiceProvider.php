@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\AdminAuth\app\Providers;
+namespace Modules\AdminAuth\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
