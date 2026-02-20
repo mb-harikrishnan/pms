@@ -41,6 +41,15 @@
 
 
 <style>
+
+.admin-content {
+  margin-left: 260px;      /* sidebar width */
+  padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
+    background: radial-gradient(circle at top left, #1a1a1d, #09090b);
+  min-height: 100vh;
+}
+
+
 /* Main Content Wrapper */
 .content-wrapper {
   max-width: 1200px;
