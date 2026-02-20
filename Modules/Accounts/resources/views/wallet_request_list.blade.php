@@ -292,14 +292,29 @@
     color: #D4AF37;
     pointer-events: none;
 }
-
+.filter-group {
+    flex: 1;
+}
+.btn-approve {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    height: 36px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.dataTables_length label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .filter-input {
     padding: 10px 10px 10px 35px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid #27272A;
     border-radius: 8px;
     color: #fff;
-    width: 200px;
+    width: 100%;
     outline: none;
     transition: 0.3s;
     font-family: 'Inter', sans-serif;
