@@ -121,10 +121,22 @@
         cursor: pointer;
     }
 
-    .menu-link:hover, .menu-link.active {
-        background: var(--hover-bg);
+    .menu-link:hover {
+        background: rgba(255, 255, 255, 0.03);
         color: var(--primary-gold);
-        border-left-color: var(--primary-gold);
+    }
+
+    .menu-link.active {
+        background: linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.05) 100%);
+        color: #fff;
+        border-left: 3px solid var(--primary-gold);
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        box-shadow: 0 4px 15px -3px rgba(212, 175, 55, 0.2);
+    }
+
+    .menu-link.active .menu-icon {
+        color: var(--primary-gold);
+        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6));
     }
 
     .link-content {
@@ -308,7 +320,8 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="brand-box">
-       <img style="width: 150px;" src="https://trademos.net/dist_assets/img/favicon/favlogoNew.png" alt="">
+        <img src="https://trademos.net/dist_assets/img/favicon/favlogoNew.png" alt="TradeMos Logo" style="height: 40px; margin-right: 12px; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));">
+        <h2>TradeMos</h2>
     </div>
     
     <ul class="sidebar-menu">
