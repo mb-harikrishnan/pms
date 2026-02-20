@@ -106,7 +106,7 @@
         }
 
         .logo-container img {
-            width: 80px;
+            width: 150px;
             height: auto;
             filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
         }
