@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\AdminAuth\app\Http\Controllers\AdminAuthController;
+use Modules\AdminAuth\Http\Controllers\AdminAuthController;
 
 Route::resource('adminauths', AdminAuthController::class)->names('adminauth');
 
