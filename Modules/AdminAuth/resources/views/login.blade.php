@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Admin Login | Trademos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="" sizes="any" />
+    <link rel="icon" href="https://trademos.net/assets/images/faviconnew.png" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="https://trademos.net/assets/images/faviconnew.png" />
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -246,6 +249,13 @@
         small[style*="color: red;"]::before {
             content: '\ea0f'; /* mixicon alert */
             font-family: 'remixicon';
+        }
+
+        @media screen and (max-width:767px) {
+            .login-box{
+                width: auto;
+                padding: 50px 20px;
+            }
         }
 
     </style>
