@@ -303,8 +303,8 @@
 
 @media screen and (max-width:767px) {
     .admin-content{
-        margin-left: 0;
-        padding: 100px 0px 40px;
+        margin-left: 0 !important;
+        padding: 100px 0px 40px !important;
     }
 }
 

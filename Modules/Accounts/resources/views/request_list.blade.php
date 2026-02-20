@@ -423,6 +423,9 @@
     background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
     border: 1px solid rgba(46, 204, 113, 0.3);
+    height: 36px;
+    padding: 10px;
+    border-radius: 10px;
 }
 .btn-approve:hover { background: #2ecc71; color: #fff; }
 
