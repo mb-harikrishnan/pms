@@ -435,5 +435,3 @@
     }
 </script>
 
-</body>
-</html>
