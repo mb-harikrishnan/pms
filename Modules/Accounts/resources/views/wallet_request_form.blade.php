@@ -24,10 +24,8 @@
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
-  </div>
 
-  <div class="form-row">
-    <div class="form-group">
+     <div class="form-group">
       <label>Request Reason</label>
       <textarea name="request_reason" placeholder="Enter request reason"></textarea>
       @error('request_reason')
@@ -35,6 +33,8 @@
       @enderror
     </div>
   </div>
+
+
 
   <button type="submit" class="save-btn">Save Request</button>
 </form>

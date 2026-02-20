@@ -38,7 +38,7 @@
   <div class="form-row">
     <div class="form-group" style="width:100%;">
       <label>Description</label>
-      <textarea name="description" placeholder="Enter description" rows="4"></textarea>
+      <textarea name="description" placeholder="Enter description" rows="1"></textarea>
       @error('description')
         <small class="error-text">{{ $message }}</small>
       @enderror
