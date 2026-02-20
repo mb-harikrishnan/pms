@@ -44,26 +44,42 @@
 <style>
 /* Main content */
 .admin-content {
-  margin-left: 260px;
-  padding: 100px 60px 40px;
-  background: #f4f7fb;
+  margin-left: 260px;      /* sidebar width */
+  padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
+    background: radial-gradient(circle at top left, #1a1a1d, #09090b);
   min-height: 100vh;
 }
+
+
+
+
+
+.page-header {
+  margin-bottom: 30px;
+  border-left: 4px solid #D4AF37; /* Primary Gold */
+  padding-left: 20px;
+}
+
+.page-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: #D4AF37;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.page-header p {
+  color: #A1A1AA; /* Muted text */
+  font-size: 14px;
+}
+
 
 .content-wrapper {
   width: 100%;
   /* padding: 0 50px; */
 }
 
-/* Header */
-.page-header {
-  margin-bottom: 25px;
-}
 
-.page-header h2 {
-  font-size: 24px;
-  font-weight: 700;
-}
 
 /* Card */
 .table-card {
