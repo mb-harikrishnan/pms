@@ -253,7 +253,7 @@
 
         @media screen and (max-width:767px) {
             .login-box{
-                width: auto;
+                width: 90%;
                 padding: 50px 20px;
             }
         }
