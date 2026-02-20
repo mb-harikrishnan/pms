@@ -1,310 +1,303 @@
-@extends('admin_layout_golden')
 
-@section('content')
+@include('staff::layouts.header')
+<main class="admin-content">
 
-<div class="content-wrapper">
+  <div class="content-wrapper">
 
     <!-- Page Header -->
     <div class="page-header">
       <h2>Add New Employee</h2>
-      <p>Create a new staff account with specific roles and permissions.</p>
     </div>
 
     <!-- Form Card -->
     <div class="form-card">
       <form method="POST" action="{{route('staff.save_employee')}}" id="employeeForm">
-          @csrf
+  @csrf
 
-          <div class="form-section-title">Personal Information</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Full Name</label>
-              <div class="input-wrapper">
-                  <i class="ri-user-line"></i>
-                  <input type="text" name="fullname" placeholder="Enter full name">
-              </div>
-              @error('fullname')
-                <small class="error-text">{{ $message }}</small>
-              @enderror
-            </div>
-
-            <div class="form-group">
-              <label>Mobile Number</label>
-              <div class="input-wrapper">
-                  <i class="ri-phone-line"></i>
-                  <input type="text" name="mobile" placeholder="Enter mobile number">
-              </div>
-              @error('mobile')
-                <small class="error-text">{{ $message }}</small>
-              @enderror
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email Address</label>
-              <div class="input-wrapper">
-                  <i class="ri-mail-line"></i>
-                  <input type="email" name="email" placeholder="Enter email address">
-              </div>
-              @error('email')
-                <small class="error-text">{{ $message }}</small>
-              @enderror
-            </div>
-
-            <div class="form-group">
-              <label>Select Role</label>
-              <div class="input-wrapper">
-                  <i class="ri-shield-star-line"></i>
-                  <select name="role">
-                      <option value="">-- Select Role --</option>
-                      <option value="admin">Admin</option>
-                      {{-- <option value="sub_admin">Sub Admin</option> --}}
-                  </select>
-              </div>
-              @error('role')
-                <small class="error-text">{{ $message }}</small>
-              @enderror
-            </div>
-          </div>
-
-        <div class="form-section-title" style="margin-top: 10px;">Account Security</div>
-        <div class="form-row">
-          <div class="form-group">
-              <label>Username</label>
-              <div class="input-wrapper">
-                  <i class="ri-id-card-line"></i>
-                  <input type="text" name="username" placeholder="Enter username">
-              </div>
-              @error('username')
-                <small class="error-text">{{ $message }}</small>
-              @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                    <i class="ri-lock-password-line"></i>
-                    <input type="password" name="password" placeholder="Enter password">
-                </div>
-                @error('password')
-                  <small class="error-text">{{ $message }}</small>
-                @enderror
-          </div>
-        </div>
-
-        <button type="submit" class="save-btn">
-            <i class="ri-save-3-line"></i> Save Employee Record
-        </button>
-      </form>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" name="fullname" placeholder="Enter full name">
+      @error('fullname')
+        <small class="error-text">{{ $message }}</small>
+      @enderror
     </div>
+
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input type="text" name="mobile" placeholder="Enter mobile number">
+      @error('mobile')
+        <small class="error-text">{{ $message }}</small>
+      @enderror
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" name="email" placeholder="Enter email address">
+      @error('email')
+        <small class="error-text">{{ $message }}</small>
+      @enderror
+    </div>
+
+
+      <div class="form-group">
+  <label>Select Role</label>
+  <select name="role">
+      <option value="">-- Select Role --</option>
+      <option value="admin">Admin</option>
+      {{-- <option value="sub_admin">Sub Admin</option> --}}
+  </select>
+
+  @error('role')
+    <small class="error-text">{{ $message }}</small>
+  @enderror
+</div>
+
+    
+  </div>
+
+<div class="form-row">
+  <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="Enter username">
+      @error('username')
+        <small class="error-text">{{ $message }}</small>
+      @enderror
+    </div>
+
+
+    <div class="form-group">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter password">
+    @error('password')
+      <small class="error-text">{{ $message }}</small>
+    @enderror
+  </div>
+
+
 
 </div>
 
+  <button type="submit" class="save-btn">Save Employee</button>
+</form>
+
+
+    </div>
+
+  </div>
+
+</main>
+
+
 <style>
-/* Main Content Wrapper override for this page */
+
+.error-text
+{
+  box-sizing: border-box;
+  color: #e11d48;
+  font-size: 12px;
+}
+
+  /* Main admin area */
+.admin-content {
+  margin-left: 260px;      /* sidebar width */
+  padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
+  background: #f4f7fb;
+  min-height: 100vh;
+}
+
+/* Content wrapper */
 .content-wrapper {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
-  animation: fadeIn 0.5s ease-out;
+  max-width: 1200px;
+  margin: 0 auto;   /* centers content */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Page Header */
+/* Page header */
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid var(--primary-gold);
-  padding-left: 20px;
 }
 
 .page-header h2 {
-  font-family: 'Cinzel', serif;
-  font-size: 28px;
-  color: var(--primary-gold);
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .page-header p {
-  color: var(--text-muted);
+  color: #6b7280;
   font-size: 14px;
 }
 
-/* Form Card */
+/* Form card */
 .form-card {
-  background: #121214;
-  padding: 40px;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 1000px;
+  background: #fff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.08);
 }
 
-.form-section-title {
-    color: var(--text-main);
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-    letter-spacing: 0.5px;
-}
-
-/* Form Layout */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-bottom: 10px;
-}
-
+/* Form fields */
 .form-group {
   margin-bottom: 20px;
 }
 
 .form-group label {
-  color: var(--text-muted);
-  font-size: 13px;
-  margin-bottom: 8px;
-  display: block;
-  font-weight: 500;
-}
-
-/* Creative Input Wrapper */
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-wrapper i {
-    position: absolute;
-    left: 15px;
-    color: var(--primary-gold);
-    font-size: 18px;
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.form-group input, .form-group select {
-  width: 100%;
-  padding: 14px 14px 14px 45px; /* Space for icon */
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  color: var(--text-main);
+  font-weight: 600;
   font-size: 14px;
-  transition: all 0.3s;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-group input ,.form-group select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: .3s;
+}
+.form-group input ,.form-group select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: .3s;
+}
+
+.form-group input:focus {
   outline: none;
-}
-
-.form-group input:focus, .form-group select:focus {
-  border-color: var(--primary-gold);
-  background: rgba(212, 175, 55, 0.05); /* very light gold tint */
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-}
-
-.form-group input::placeholder {
-    color: #555;
-}
-
-/* Select styling fix for dark mode */
-.form-group select option {
-    background: #1a1a1d;
-    color: var(--text-main);
-    padding: 10px;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.15);
 }
 
 /* Button */
 .save-btn {
   width: 100%;
-  margin-top: 25px;
-  padding: 16px;
-  border-radius: 12px;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 30px;
   border: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #000;
+  color: #fff;
   cursor: pointer;
-  background: linear-gradient(135deg, #D4AF37, #F3E5AB); /* Golden Gradient */
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  background: linear-gradient(135deg,#6366f1,#4f46e5);
+  transition: .3s;
 }
 
 .save-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-  filter: brightness(1.1);
-}
-
-.error-text {
-  color: #ff5b5b;
-  font-size: 12px;
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.error-text::before {
-    content: '\ea0f'; /* RemixIcon alert */
-    font-family: 'remixicon';
+  box-shadow: 0 10px 25px rgba(99,102,241,.4);
 }
 
 /* Mobile */
 @media(max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .admin-content {
+    margin-left: 0;
+    padding: 20px;
   }
-  
-  .content-wrapper {
-      padding: 0 15px;
-  }
-  
+
   .form-card {
-      padding: 25px;
+    width: 100%;
   }
 }
+
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+/* Mobile friendly */
+@media(max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 </style>
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script> 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 <script>
 $(document).ready(function () {
+
     $("#employeeForm").validate({
         rules: {
-            fullname: { required: true, minlength: 3 },
-            mobile: { required: true, digits: true, minlength: 10, maxlength: 10 },
-            email: { required: true, email: true },
-            username: { required: true, minlength: 4 },
-            password: { required: true, minlength: 6 },
-            role: { required: true }
+            fullname: {
+                required: true,
+                minlength: 3
+            },
+            mobile: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 10
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            username: {
+                required: true,
+                minlength: 4
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+             role: {
+                required: true
+            }
         },
+
         messages: {
-            fullname: { required: "Full name is required", minlength: "Minimum 3 characters" },
-            mobile: { required: "Mobile number is required", digits: "Only numbers allowed", minlength: "10 digits required", maxlength: "10 digits required" },
-            email: { required: "Email is required", email: "Enter valid email" },
-            username: { required: "Username required", minlength: "Minimum 4 characters" },
-            password: { required: "Password required", minlength: "Minimum 6 characters" },
-            role: { required: "Please select a role" }
+            fullname: {
+                required: "Full name is required",
+                minlength: "Minimum 3 characters"
+            },
+            mobile: {
+                required: "Mobile number is required",
+                digits: "Only numbers allowed",
+                minlength: "Must be 10 digits",
+                maxlength: "Must be 10 digits"
+            },
+            email: {
+                required: "Email is required",
+                email: "Enter valid email"
+            },
+            username: {
+                required: "Username required",
+                minlength: "Minimum 4 characters"
+            },
+            password: {
+                required: "Password required",
+                minlength: "Minimum 6 characters"
+            },
+             role: {
+                required: "Please select a role"
+            }
         },
+
         errorElement: "small",
         errorClass: "error-text"
     });
+
 });
 </script>
+
+
+
+
 
 {{-- SweetAlert Session Messages --}}
 @if(session('success'))
@@ -313,9 +306,7 @@ Swal.fire({
     icon: 'success',
     title: 'Success',
     text: "{{ session('success') }}",
-    background: '#1a1a1d',
-    color: '#fff',
-    confirmButtonColor: '#D4AF37'
+    confirmButtonColor: '#6366f1'
 });
 </script>
 @endif
@@ -326,11 +317,10 @@ Swal.fire({
     icon: 'error',
     title: 'Error',
     text: "{{ session('error') }}",
-    background: '#1a1a1d',
-    color: '#fff',
-    confirmButtonColor: '#ff5b5b'
+    confirmButtonColor: '#e11d48'
 });
 </script>
 @endif
 
-@endsection
+</body>
+</html>
