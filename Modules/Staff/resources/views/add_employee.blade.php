@@ -104,8 +104,34 @@
 .admin-content {
   margin-left: 260px;      /* sidebar width */
   padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
-  background: #f4f7fb;
+    background: radial-gradient(circle at top left, #1a1a1d, #09090b);
   min-height: 100vh;
+}
+
+
+.admin-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px; /* Top heavy border */
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent); /* Fading Gold Line */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); /* Soft Glow */
+    z-index: 10;
+}
+
+/* Optional: Adding a faint corner accent */
+.admin-content::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.03), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 /* =========================================
