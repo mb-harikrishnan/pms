@@ -50,7 +50,7 @@
         </a>
 
          <!-- Change Password Card (Clickable Widget) -->
-         <a href="{{ route('admin.change_password') }}" class="stat-card h-slide-up security-card" style="animation-delay: 0.3s;">
+         <a href="#!" class="stat-card h-slide-up security-card" style="animation-delay: 0.3s;">
             <div class="stat-icon-wrapper red-glow">
                 <i class="ri-shield-keyhole-line"></i>
             </div>
