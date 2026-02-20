@@ -308,6 +308,10 @@
     }
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+}
+
 </style>
 </head>
 
