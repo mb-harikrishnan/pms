@@ -265,13 +265,17 @@
     pointer-events: none;
 }
 
+.filter-group {
+    flex: 1;
+}
+
 .filter-input {
     padding: 10px 10px 10px 35px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid #27272A;
     border-radius: 8px;
     color: #fff;
-    width: 200px;
+    width: 100%;
     outline: none;
     transition: 0.3s;
     font-family: 'Inter', sans-serif;

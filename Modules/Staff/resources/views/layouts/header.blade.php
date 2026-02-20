@@ -297,6 +297,17 @@
         }
     }
 
+    input[type="date"] {
+    color-scheme: initial !important;
+}
+
+@media screen and (max-width:767px) {
+    .admin-content{
+        margin-left: 0;
+        padding: 100px 0px 40px;
+    }
+}
+
 </style>
 </head>
 
