@@ -174,7 +174,7 @@
 
 /* The actual input field */
 .form-group input, 
-.form-group select {
+.form-group select,.form-group textarea {
   width: 100%;
   padding: 14px 14px 14px 14px; /* Left padding space for the icon */
   background: rgba(255, 255, 255, 0.03); /* Slight transparency */
@@ -188,12 +188,12 @@
 
 /* Hover & Focus Effects */
 .form-group input:hover,
-.form-group select:hover {
+.form-group select:hover ,.form-group textarea:hover {
   border-color: #555;
 }
 
 .form-group input:focus, 
-.form-group select:focus {
+.form-group select:focus, .form-group textarea:focus {
   border-color: #D4AF37; /* Gold Border on Click */
   background: rgba(212, 175, 55, 0.05); /* Soft Gold Tint */
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); /* Glow Effect */
