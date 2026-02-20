@@ -39,7 +39,7 @@
     body {
         background: var(--bg-dark);
         color: var(--text-main);
-        display: flex;
+        /* display: flex; */
         min-height: 100vh;
         overflow-x: hidden;
     }
