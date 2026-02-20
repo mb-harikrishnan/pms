@@ -308,7 +308,7 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
     <div class="brand-box">
-        <h2>TradeMos</h2>
+       <img style="width: 150px;" src="https://trademos.net/dist_assets/img/favicon/favlogoNew.png" alt="">
     </div>
     
     <ul class="sidebar-menu">
