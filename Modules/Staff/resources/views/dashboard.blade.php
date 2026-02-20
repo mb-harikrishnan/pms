@@ -133,12 +133,23 @@
 }
 
 
+@media screen and (max-width:767px) {
+    .main-content {
+    margin-left: 0px;
+    margin-top: 80px;
+    padding: 30px 15;
+    width: 100%;
+}
+
+}
+
 
 /* Main Content Wrapper */
 .content-wrapper {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
+  background: radial-gradient(circle at top left, #1a1a1d, #09090b);
 }
 
 /* Welcome Banner */
@@ -251,7 +262,7 @@
 /* Dashboard Grid */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
 }
 
