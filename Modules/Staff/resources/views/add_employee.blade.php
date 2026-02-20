@@ -109,36 +109,9 @@
 }
 
 
-.admin-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px; /* Top heavy border */
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent); /* Fading Gold Line */
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); /* Soft Glow */
-    z-index: 10;
-}
 
-/* Optional: Adding a faint corner accent */
-.admin-content::after {
-    content: "";
-    position: absolute;
-    bottom: -100px;
-    right: -100px;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.03), transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
 
-/* =========================================
-   CREATIVE FORM STYLES (Dark Gold Theme)
-   ========================================= */
 
-/* 1. Page Header with Golden Accent */
 .page-header {
   margin-bottom: 30px;
   border-left: 4px solid #D4AF37; /* Primary Gold */
