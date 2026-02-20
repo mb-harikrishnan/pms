@@ -194,7 +194,7 @@
 .form-group input, 
 .form-group select {
   width: 100%;
-  padding: 14px 14px 14px 45px; /* Left padding space for the icon */
+  padding: 14px 14px 14px 14px; /* Left padding space for the icon */
   background: rgba(255, 255, 255, 0.03); /* Slight transparency */
   border: 1px solid #27272A;
   border-radius: 10px;
