@@ -27,7 +27,7 @@
 
      <div class="form-group">
       <label>Request Reason</label>
-      <textarea name="request_reason" placeholder="Enter request reason"></textarea>
+      <textarea name="request_reason" placeholder="Enter request reason" rows="1"></textarea>
       @error('request_reason')
         <small class="error-text">{{ $message }}</small>
       @enderror
