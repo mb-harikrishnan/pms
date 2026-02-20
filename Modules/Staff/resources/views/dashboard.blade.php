@@ -138,7 +138,7 @@
     .main-content {
     margin-left: 0px;
     margin-top: 80px;
-    padding: 30px 15;
+    padding: 30px 15px;
     width: 100%;
 }
 
@@ -149,7 +149,7 @@
 .content-wrapper {
   max-width: 1200px;
   margin: 40px auto;
-  padding: 0 20px;
+ 
 
 }
 
@@ -263,7 +263,7 @@
 /* Dashboard Grid */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 30px;
 }
 
