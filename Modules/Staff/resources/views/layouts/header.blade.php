@@ -499,5 +499,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 </script>
 
+
+<style>
+    .content-wrapper{
+        max-width: 100%;
+    }
+</style>
+
 </body>
 </html>
