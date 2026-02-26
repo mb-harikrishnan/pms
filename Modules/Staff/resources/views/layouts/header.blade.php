@@ -512,6 +512,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 36px;
     padding: 10px;
     border-radius: 10px;
+    margin: 0px 10px !important;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 18px 10px !important;
 }
 </style>
 
