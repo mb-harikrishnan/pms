@@ -50,6 +50,7 @@
         <tr>
             <th>ID</th>
             <th>Date</th>
+            <th>Request Date</th>
             <th>From User</th>
             <th>To User</th>
             <th>Inverster</th>
@@ -66,6 +67,7 @@
             <tr>
              <td>{{ $loop->iteration }}</td>
               <td>{{ $requests->d_date }}</td>
+              <td>{{ $requests->d_request_date }}</td>
               <td>{{ $requests->to_name }}</td>
               <td>{{ $requests->C_FNAME }}</td>
               

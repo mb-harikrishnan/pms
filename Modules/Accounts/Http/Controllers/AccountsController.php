@@ -170,8 +170,7 @@ class AccountsController extends Controller
             'n_amount_inr' => $request->input('amount_inr'),
             'c_superadmin_status' => 'pending',
             'd_date' => now(),
-            'd_request_date' => $request->input('date')
-        ];
+            'd_request_date' => $request->input('date') ?? now(),        ];
 
         $db= Account :: insertrequestdata($savedata);
         if($db){
