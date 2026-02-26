@@ -37,7 +37,7 @@
   <div class="form-row">
     <div class="form-group">
       <label>Amount In INR</label>
-      <input type="text" name="amount_inr" placeholder="Enter amount in INR" readonly >
+      <input type="text" name="amount_inr" placeholder="Enter amount in INR"   >
       @error('amount_inr')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -53,6 +53,16 @@
         </select>
 
         @error('to_id')
+            <small class="error-text">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label>Select Date</label>
+        <input type="date" name="date" class="form-control"value="{{ old('date', date('Y-m-d')) }}">
+
+        
+        @error('date')
             <small class="error-text">{{ $message }}</small>
         @enderror
     </div>

@@ -8,7 +8,7 @@
 
     <!-- Page Header -->
     <div class="page-header">
-      <h2>Wallet Request</h2>
+      <h2>Amount Request</h2>
     </div>
 
     <!-- Form Card -->

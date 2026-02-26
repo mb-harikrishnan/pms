@@ -18,7 +18,7 @@
 
   <div class="form-row">
     <div class="form-group">
-      <label>Title</label>
+      <label>Requirement</label>
       <input type="text" name="title" placeholder="Enter title">
       @error('title')
         <small class="error-text">{{ $message }}</small>
@@ -45,7 +45,8 @@
     </div>
     <div class="form-group">
     <label>Select Date</label>
-    <input type="date" name="date" class="form-control">
+    <input type="date" name="date" class="form-control" value="{{ old('date', date('Y-m-d')) }}">
+
     
     @error('date')
         <small class="error-text">{{ $message }}</small>

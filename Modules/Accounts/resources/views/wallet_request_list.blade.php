@@ -4,7 +4,7 @@
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2> Requests</h2>
+      <h2>Amount List</h2>
     </div>
 
    @php
@@ -53,8 +53,6 @@
             <th>Description</th>
             <th>Amount </th>
             <th>Date</th>
-            <th>Action</th>
-            <th>Reject Reason</th>
           
           </tr>
         </thead>
@@ -69,96 +67,7 @@
               <td>{{ $requests->n_amount }}</td>
               <td>{{ $requests->d_date }}</td>
               
-                <td>
-
-                  @php
-                      $adminId = session('admin_id');
-                      $status  = $requests->c_superadmin_status;
-                      $admin_status = $requests->c_admin_status;
-                      $n_assigned_id = $requests->n_assigned_id;
-                  @endphp
-
-                  {{-- ================= SUPER ADMIN (ID = 1) ================= --}}
-                  @if($adminId == 1)
-
-                      @if($status == 'PENDING')
-                          <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.approve_wallet_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve approve-btn">
-                            Approve
-                          </a>
-
-                          <a href="javascript:void(0);"
-                      data-url="{{ route('accounts.reject_wallet_request', ['id' => $requests->n_slno]) }}"
-                      class="btn-reject reject-btn">
-                      Reject
-                    </a>
-
-                   @else
-                        @if($status == 'APPROVED')
-                            <span class="status-approved">Approved</span>
-                        @elseif($status == 'REJECTED')
-                            <span class="status-rejected">Rejected</span>
-                        @endif
-                    @endif
-
-
-                  {{-- ================= ADMIN (ID = assigned id) ================= --}}
-@elseif($adminId == $n_assigned_id)
-
-    {{-- If SuperAdmin has not approved --}}
-    @if($status == 'PENDING')
-        <span class="btn-reject">Waiting for SuperAdmin Approval</span>
-
-    @elseif($status == 'REJECTED')
-        <span class="btn-reject">Request Rejected by SuperAdmin</span>
-
-    {{-- If SuperAdmin approved, now check Admin action --}}
-    @elseif($status == 'APPROVED')
-
-        @if($admin_status == 'APPROVED')
-            <span class="btn-approve">Request Completed</span>
-
-        @elseif($admin_status == 'REJECTED')
-            <span class="btn-reject">Request Rejected</span>
-
-        @else
-            <a href="javascript:void(0);"
-               data-url="{{ route('accounts.approve_wallet_request_admin', ['id' => $requests->n_slno]) }}"
-               class="btn-approve admin-approve-btn">
-               Approve
-            </a>
-
-            <a href="javascript:void(0);"
-               data-url="{{ route('accounts.reject_wallet_request_admin', ['id' => $requests->n_slno]) }}"
-               class="btn-reject admin-reject-btn">
-               Reject
-            </a>
-        @endif
-
-    @endif
-
-                    
-                      
-
-
-                  {{-- ================= OTHER USERS ================= --}}
-                  @else
-
-                      @if($admin_status == 'APPROVED')
-                          <span class="btn-reject">Request Completed</span>
-
-                      @elseif($admin_status == 'REJECTED')
-                          <span class="btn-reject">Request Rejected</span>
-
-                      @else
-                          <span class="btn-reject">Pending Approval</span>
-                      @endif
-
-                  @endif
-
-                  </td>
-                  <td>{{ $requests->c_admin_reject_reason ?? '' }}</td>
+               
          
             </tr>
             
@@ -171,32 +80,6 @@
 </main>
 
 
-
-<!-- Assign Admin Modal -->
-<div id="assignAdminModal" class="custom-modal">
-    <div class="modal-content">
-        <h3>Assign Admin</h3>
-
-        <select id="assign_admin_id" class="form-control">
-            <option value="">-- Select Admin --</option>
-                <option value="2">
-                    Admin 1
-                </option>
-        {{-- <select id="assign_admin_id" class="form-control">
-            <option value="">-- Select Admin --</option>
-            @foreach($admins as $admin)
-                <option value="{{ $admin->n_slno }}">
-                    {{ $admin->c_name }}
-                </option>
-            @endforeach --}}
-        </select>
-
-        <div class="modal-actions">
-            <button id="confirmApprove" class="btn-approve">Confirm</button>
-            <button id="closeModal" class="btn-reject">Cancel</button>
-        </div>
-    </div>
-</div>
 
 
 
@@ -609,174 +492,4 @@ $(document).ready(function () {
 
 
 
-
-
-  <script>
-let approveUrl = '';
-let currentRow = '';
-
-$(document).on('click', '.approve-btn', function () {
-
-    approveUrl = $(this).data('url');
-    currentRow = $(this).closest('tr');
-
-    $('#assignAdminModal').css('display', 'flex');
-});
-
-$('#closeModal').click(function () {
-    $('#assignAdminModal').hide();
-});
-$('#confirmApprove').click(function () {
-
-    let assignedAdmin = $('#assign_admin_id').val();
-
-    if (!assignedAdmin) {
-        Swal.fire('Warning', 'Please select an admin', 'warning');
-        return;
-    }
-
-    $.ajax({
-        url: approveUrl,
-        type: "POST",
-        data: {
-            _token: "{{ csrf_token() }}",
-            assigned_admin_id: assignedAdmin
-        },
-        success: function (response) {
-
-            $('#assignAdminModal').hide();
-
-            Swal.fire(
-                'Approved!',
-                'Request has been approved successfully.',
-                'success'
-            );
-
-            currentRow.find('td:last').html(
-                '<span class="status-approved">Approved</span>'
-            );
-        },
-        error: function () {
-            Swal.fire('Error', 'Something went wrong!', 'error');
-        }
-    });
-});
-
-    // REJECT BUTTON
-    $(document).on('click', '.reject-btn', function () {
-
-        let url = $(this).data('url');
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to reject this request!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc2626',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Yes, Reject it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                Swal.fire(
-                    'Rejected!',
-                    'Request has been rejected.',
-                    'error'
-                ).then(() => {
-                    window.location.href = url;
-                });
-
-            }
-        });
-    });
-
-$(document).on('click', '.admin-approve-btn', function () {
-
-    let url = $(this).data('url');
-    let row = $(this).closest('tr');
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to approve this request!",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#16a34a',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Approve it!'
-    }).then((result) => {
-
-        if (result.isConfirmed) {
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function () {
-
-                    Swal.fire(
-                        'Approved!',
-                        'Request has been approved successfully.',
-                        'success'
-                    );
-
-                    // Update status without reload
-                    row.find('td:last').html(
-                        '<span class="status-approved">Approved</span>'
-                    );
-
-                },
-                error: function () {
-                    Swal.fire('Error', 'Something went wrong!', 'error');
-                }
-            });
-
-        }
-    });
-});
-
-
-
-    // REJECT BUTTON
-    $(document).on('click', '.admin-reject-btn', function () {
-
-    let url = $(this).data('url');
-
-    Swal.fire({
-        title: 'Reject Request',
-        input: 'textarea',
-        inputLabel: 'Enter Reject Reason',
-        inputPlaceholder: 'Type your reason here...',
-        inputAttributes: {
-            'aria-label': 'Type your reason here'
-        },
-        inputValidator: (value) => {
-            if (!value) {
-                return 'Reject reason is required!';
-            }
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Reject',
-        confirmButtonColor: '#dc2626',
-        cancelButtonColor: '#6b7280'
-    }).then((result) => {
-
-        if (result.isConfirmed) {
-
-            let reason = result.value;
-
-            // Redirect with reason (GET method)
-            window.location.href = url + '?reason=' + encodeURIComponent(reason);
-
-        }
-    });
-});
-
-
-
-
-    
-
-</script>
 

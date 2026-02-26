@@ -4,7 +4,7 @@
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2> Requests</h2>
+      <h2>Pending Requests</h2>
     </div>
 
    @php
@@ -13,7 +13,7 @@
 
 <div class="filter-card">
   
-    <form method="GET" action="{{ route('accounts.request_list') }}">
+    <form method="GET" action="{{ route('accounts.wallet_request_list_super') }}">
         <div class="filter-row">
 
             <div class="filter-group">
@@ -49,13 +49,12 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th> User</th>
+            <th>Description</th>
+            <th>Amount </th>
             <th>Date</th>
-            <th>From User</th>
-            <th>To User</th>
-            <th>Inverster</th>
-            <th>USDT</th>
-            <th>INR</th>
             <th>Action</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -64,55 +63,48 @@
           
             <tr>
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $requests->d_date }}</td>
-              <td>{{ $requests->to_name }}</td>
               <td>{{ $requests->C_FNAME }}</td>
-
-              <td>{{ $requests->c_active_user }}</td>
-              <td>{{ $requests->n_usdt }}</td>
-              <td>{{ $requests->n_amount_inr }}</td>
+              <td>{{ $requests->c_description }}</td>
+              <td>{{ $requests->n_amount }}</td>
+              <td>{{ $requests->d_date }}</td>
               
-              
-                <td>
+                 <td>
+        @php
+            $adminId = session('admin_id');
+            $status  = $requests->c_superadmin_status;
+        @endphp
 
-                  @php
-                      $adminId = session('admin_id');
-                      $status  = $requests->c_superadmin_status;
-                      $admin_status = $requests->c_admin_status;
-                  @endphp
+        {{-- SUPER ADMIN (ID = 1) --}}
+        @if($adminId == 1)
 
-                  {{-- ================= SUPER ADMIN (ID = 1) ================= --}}
-                  @if($adminId == 1)
+            @if($status == 'PENDING')
 
-                      @if($status == 'pending')
-                          <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.approve_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve approve-btn">
-                            Approve
-                          </a>
+                <a href="javascript:void(0);"
+                   data-url="{{ route('accounts.approve_wallet_request', ['id' => $requests->n_slno]) }}"
+                   class="btn-approve approve-btn">
+                   Approve
+                </a>
 
-                           <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.reject_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve reject-btn">
-                            Rejected
-                          </a>
+                <a href="javascript:void(0);"
+                   data-url="{{ route('accounts.reject_wallet_request', ['id' => $requests->n_slno]) }}"
+                   class="btn-reject reject-btn">
+                   Reject
+                </a>
 
+               
 
-                                        @elseif($status == 'approved')
-                                <span class="status-approved">Approved</span>
+            @elseif($status == 'APPROVED')
+                <span class="status-approved">Approved</span>
 
-                            @elseif($status == 'rejected')
-                                <span class="status-rejected">Rejected</span>
+            @elseif($status == 'REJECTED')
+                <span class="status-rejected">Rejected</span>
 
-                            @endif
+            @endif
 
-                        @endif
+        @endif
+    </td>  
 
 
-
-          
-
-                  </td>
          
             </tr>
             
@@ -125,6 +117,41 @@
 </main>
 
 
+
+<!-- Assign Admin Modal -->
+<div id="assignAdminModal" class="custom-modal">
+    <div class="modal-box">
+        
+        <div class="modal-header">
+            <h3>Assign to Admin – Request Amount</h3>
+            <p>Select an admin to process this wallet request</p>
+        </div>
+
+        <div class="modal-body">
+            <label>Select Admin</label>
+            {{-- <select id="assign_admin_id">
+                <option value="">-- Select Admin --</option>
+                <option value="2">Admin 1</option>
+            </select> --}}
+
+
+             <select id="assign_admin_id">
+    <option value="">-- Select Admin --</option>
+    @foreach($admins as $admin)
+        <option value="{{ $admin->n_slno }}">
+            {{ $admin->C_FNAME }}
+        </option>
+    @endforeach
+</select>
+        
+
+        <div class="modal-actions">
+            <button id="closeModal" class="btn-cancel">Cancel</button>
+            <button id="confirmApprove" class="btn-confirm">Confirm</button>
+        </div>
+
+    </div>
+</div>
 
 
 <style>
@@ -152,24 +179,23 @@
 
 /* Page Header */
 .page-header {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   border-left: 4px solid #D4AF37;
   padding-left: 20px;
 }
 
 .page-header h2 {
-  font-family: 'Cinzel', serif;
-  font-size: 28px;
-  color: #D4AF37;
-  margin-bottom: 5px;
-  letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    color: #D4AF37;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
 }
 
 .page-header p {
   color: #A1A1AA;
   font-size: 14px;
 }
-
 
 /* Filter Card */
 .filter-card {
@@ -220,11 +246,22 @@
     color: #D4AF37;
     pointer-events: none;
 }
-
 .filter-group {
     flex: 1;
 }
-
+.btn-approve {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    height: 36px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.dataTables_length label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .filter-input {
     padding: 10px 10px 10px 35px;
     background: rgba(255, 255, 255, 0.03);
@@ -264,7 +301,7 @@
 /* Table Card */
 .table-card {
   background: #121214;
-  padding: 0; /* Clean Layout */
+  padding: 0;
   border-radius: 20px;
   border: 1px solid #27272A;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -305,7 +342,6 @@
 
 /* Cell Styles */
 .id-badge { color: #888; font-family: monospace; }
-
 .user-cell { display: flex; align-items: center; gap: 10px; }
 .user-avatar-small {
     width: 28px;
@@ -317,17 +353,20 @@
     justify-content: center;
     color: #D4AF37;
 }
-
-.amount-usdt { color: #2ecc71; font-weight: 600; }
-.amount-usdt small { font-size: 10px; opacity: 0.7; }
-.amount-inr { color: #fff; font-weight: 500; }
-
+.amount-cell { font-weight: 600; color: #fff; }
 .date-badge {
     padding: 4px 10px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
     font-size: 12px;
     color: #A1A1AA;
+}
+.reject-reason {
+    font-size: 12px;
+    color: #e74c3c;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* Status Badges */
@@ -379,9 +418,6 @@
     background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
     border: 1px solid rgba(46, 204, 113, 0.3);
-    height: 36px;
-    padding: 10px;
-    border-radius: 10px;
 }
 .btn-approve:hover { background: #2ecc71; color: #fff; }
 
@@ -393,6 +429,113 @@
 .btn-reject:hover { background: #e74c3c; color: #fff; }
 
 
+/* Modal Styles (Dark Theme) */
+.custom-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6); /* lighter overlay */
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Bigger Modal */
+.modal-box {
+    background: #18181b;
+    width: 600px;              /* 🔥 Bigger width */
+    max-width: 90%;
+    border-radius: 20px;
+    border: 1px solid #27272A;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Header */
+.modal-header {
+    background: #121214;
+    padding: 25px;
+    border-bottom: 1px solid #27272A;
+    text-align: center;
+}
+
+.modal-header h3 {
+    color: #D4AF37;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.modal-header p {
+    color: #A1A1AA;
+    font-size: 14px;
+}
+
+/* Body */
+.modal-body {
+    padding: 30px;
+}
+
+.modal-body label {
+    display: block;
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.modal-body select {
+    width: 100%;
+    padding: 12px;
+    background: #09090b;
+    border: 1px solid #27272A;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+}
+
+.modal-body select:focus {
+    border-color: #D4AF37;
+}
+
+/* Actions */
+.modal-actions {
+    padding: 20px;
+    background: #121214;
+    border-top: 1px solid #27272A;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #27272A;
+    color: #A1A1AA;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #27272A;
+    color: #fff;
+}
+
+.btn-confirm {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(135deg, #D4AF37, #AA8C2C);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-confirm:hover {
+    filter: brightness(1.1);
+}
 /* Responsive */
 @media (max-width: 768px) {
   .content-wrapper { padding: 0 15px; }
@@ -424,8 +567,6 @@
 }
 </style>
 
-
-
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -442,81 +583,93 @@ $(document).ready(function () {
 
 
   <script>
+let approveUrl = '';
+let currentRow = '';
+
 $(document).on('click', '.approve-btn', function () {
 
+    approveUrl = $(this).data('url');
+    currentRow = $(this).closest('tr');
+
+    $('#assignAdminModal').css('display', 'flex');
+});
+
+$('#closeModal').click(function () {
+    $('#assignAdminModal').hide();
+});
+$('#confirmApprove').click(function () {
+
+    let assignedAdmin = $('#assign_admin_id').val();
+
+    if (!assignedAdmin) {
+        Swal.fire('Warning', 'Please select an admin', 'warning');
+        return;
+    }
+
+    $.ajax({
+        url: approveUrl,
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            assigned_admin_id: assignedAdmin
+        },
+        success: function (response) {
+
+            $('#assignAdminModal').hide();
+
+            Swal.fire(
+                'Approved!',
+                'Request has been approved successfully.',
+                'success'
+            );
+
+            currentRow.find('td:last').html(
+                '<span class="status-approved">Approved</span>'
+            );
+        },
+        error: function () {
+            Swal.fire('Error', 'Something went wrong!', 'error');
+        }
+    });
+});
+
+     // REJECT BUTTON
+    $(document).on('click', '.reject-btn', function () {
+
     let url = $(this).data('url');
-    let row = $(this).closest('tr');
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to approve this request!",
-        icon: 'question',
+        title: 'Reject Request',
+        input: 'textarea',
+        inputLabel: 'Enter Reject Reason',
+        inputPlaceholder: 'Type your reason here...',
+        inputAttributes: {
+            'aria-label': 'Type your reason here'
+        },
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Reject reason is required!';
+            }
+        },
         showCancelButton: true,
-        confirmButtonColor: '#16a34a',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Approve it!'
+        confirmButtonText: 'Reject',
+        confirmButtonColor: '#dc2626',
+        cancelButtonColor: '#6b7280'
     }).then((result) => {
 
         if (result.isConfirmed) {
 
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function () {
+            let reason = result.value;
 
-                    Swal.fire(
-                        'Approved!',
-                        'Request has been approved successfully.',
-                        'success'
-                    );
-
-                    // Update status without reload
-                    row.find('td:last').html(
-                        '<span class="status-approved">Approved</span>'
-                    );
-
-                },
-                error: function () {
-                    Swal.fire('Error', 'Something went wrong!', 'error');
-                }
-            });
+            // Redirect with reason (GET method)
+            window.location.href = url + '?reason=' + encodeURIComponent(reason);
 
         }
     });
 });
 
 
-
-    // REJECT BUTTON
-    $(document).on('click', '.reject-btn', function () {
-
-        let url = $(this).data('url');
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to reject this request!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc2626',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Yes, Reject it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                Swal.fire(
-                    'Rejected!',
-                    'Request has been rejected.',
-                    'error'
-                ).then(() => {
-                    window.location.href = url;
-                });
-
-            }
-        });
-    });
+    
 
 </script>
 

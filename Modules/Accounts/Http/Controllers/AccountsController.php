@@ -38,6 +38,114 @@ class AccountsController extends Controller
 
 
 
+       public function request_list_sub(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getRequestListSub($fromDate, $toDate);
+        
+        return view('accounts::request_list_sub', compact('db'));
+    }
+
+       public function request_list_user(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getRequestListUser($fromDate, $toDate);
+        
+        return view('accounts::request_list_user', compact('db'));
+    }
+
+
+       public function approve_list(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getApproveList($fromDate, $toDate);
+        
+        return view('accounts::approve_list', compact('db'));
+    }
+
+    public function approve_list_sub(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getApproveList($fromDate, $toDate);
+        
+        return view('accounts::approve_list_sub', compact('db'));
+    }
+
+    public function approve_list_user(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getApproveList($fromDate, $toDate);
+        
+        return view('accounts::approve_list_user', compact('db'));
+    }
+
+
+    public function reject_list(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getRejectList($fromDate, $toDate);
+        
+        return view('accounts::reject_list', compact('db'));
+    }
+    public function reject_list_sub(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getRejectListAdmin($fromDate, $toDate);
+       return view('accounts::reject_list_sub', compact('db'));
+    }     
+    
+    public function reject_list_user(Request $request)
+    {
+
+        $fromDate = $request->from_date ?? date('Y-m-d');
+        $toDate   = $request->to_date ?? date('Y-m-d');
+
+        $db = Account::getRejectListUser($fromDate, $toDate);
+       return view('accounts::reject_list_user', compact('db'));
+    }     
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function save_request(Request $request)
     {
         // Validate the request data
@@ -46,6 +154,7 @@ class AccountsController extends Controller
             'to_id' => 'required',
             'usdt' => 'required|numeric',
             'amount_inr' => 'required|numeric',
+            
         ]);
 
        $admin_id = session('admin_id');
@@ -61,6 +170,7 @@ class AccountsController extends Controller
             'n_amount_inr' => $request->input('amount_inr'),
             'c_superadmin_status' => 'pending',
             'd_date' => now(),
+            'd_request_date' => $request->input('date')
         ];
 
         $db= Account :: insertrequestdata($savedata);
@@ -142,6 +252,7 @@ class AccountsController extends Controller
         return redirect()->back()->with('success', 'Request rejected successfully!');
     }
 
+    
 
 
     public function approve_request_admin($id)
@@ -230,7 +341,8 @@ class AccountsController extends Controller
         
         return view('accounts::wallet_request_list', compact('db'));
     }
-
+   
+  
 
  public function approve_wallet_request(Request $request, $id)
 {
@@ -249,23 +361,27 @@ class AccountsController extends Controller
 
 
 
-    public function reject_wallet_request($id)
+    public function reject_wallet_request(Request $request, $id)
     {
+         $reason = $request->reason;
         DB::table('account_wallet_request')
             ->where('n_slno', $id)
             ->update([
                 'c_superadmin_status' => 'REJECTED',
+                'c_superadmin_reject_reason'=>$reason,
                 'd_reject_super' => now()
             ]);
     
-        return response()->json(['success' => true]);
-
+return back()->with('error', 'Wallet request rejected successfully');
     }
+
+
 
 
   
      public static function approve_wallet_request_admin($id)
 {
+     try {
     return DB::transaction(function () use ($id) {
 
         // 1️⃣ Get wallet request
@@ -377,8 +493,19 @@ class AccountsController extends Controller
                 'd_admin_approve'=> now()
             ]);
 
-        return back()->with('success', 'Wallet transferred successfully');
+        return response()->json([
+            'status' => true,
+            'message' => 'Wallet transferred successfully'
+        ]);
     });
+
+    } catch (\Exception $e) {
+
+        return response()->json([
+            'status' => false,
+            'message' => $e->getMessage()
+        ], 400);
+    }
 }
 
 
@@ -400,6 +527,103 @@ public function reject_wallet_request_admin(Request $request, $id)
 
 
 
+
+
+ public function wallet_approve_list(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletApproveList($fromDate, $toDate);
+    
+    return view('accounts::wallet_approve_list', compact('db'));
+}
+ public function wallet_approve_list_admin(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletApproveListAdmin($fromDate, $toDate);
+    
+    return view('accounts::wallet_approve_list_admin', compact('db'));
+}
+ public function wallet_approve_list_super(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletApproveListSuper($fromDate, $toDate);
+    
+    return view('accounts::wallet_approve_list_super', compact('db'));
+}
+
+
+
+ public function wallet_reject_list(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletRejectList($fromDate, $toDate);
+    
+    return view('accounts::wallet_reject_list', compact('db'));
+}
+
+ public function wallet_reject_list_admin(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletRejectListAdmin($fromDate, $toDate);
+    
+    return view('accounts::wallet_reject_list_admin', compact('db'));
+}
+ public function wallet_reject_list_super(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletRejectListSuper($fromDate, $toDate);
+    
+    return view('accounts::wallet_reject_list_super', compact('db'));
+}
+
+
+
+ public function wallet_request_list_super(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletListSuper($fromDate, $toDate);
+
+    $loginId = session('admin_id');
+
+    $admins = DB::table('account_employee_details')
+                ->where('c_status', 'Y')
+                ->get();
+    
+    return view('accounts::wallet_request_list_super', compact('db','admins'));
+}
+
+
+ public function wallet_request_list_admin(Request $request)
+{
+
+    $fromDate = $request->from_date ?? date('Y-m-d');
+    $toDate   = $request->to_date ?? date('Y-m-d');
+
+    $db = Account::getWalletListadmin($fromDate, $toDate);
+    
+    return view('accounts::wallet_request_list_admin', compact('db'));
+}
 
 
 

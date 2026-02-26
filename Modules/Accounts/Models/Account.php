@@ -14,8 +14,11 @@ class Account extends Model
 
     public static function getActiveAcounts()
     {
+           $admin_id = session('admin_id');
+
          return DB::table('account_employee_details') 
             ->where('c_status', 'Y')
+            ->where('n_slno', '!=', $admin_id)  // Exclude logged-in user
             ->get()->pluck('C_FNAME', 'n_slno');
     }
 
@@ -35,7 +38,34 @@ class Account extends Model
     {
         return DB::table('account_request_data as a')
         ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
-        //    ->where('a.c_status', 'pending')  
+        ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+        ->where('a.c_superadmin_status', 'pending') 
+        ->where('a.c_superadmin_status', 'pending')  
+         ->whereDate('a.d_date', '>=', $fromDate)
+        ->whereDate('a.d_date', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_to_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
+        
+
+    }
+    public static function getRequestListSub($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+        ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+        ->where('a.c_admin_status', 'pending')  
+           ->where('a.c_superadmin_status', '!=', 'rejected')
          ->whereDate('a.d_date', '>=', $fromDate)
         ->whereDate('a.d_date', '<=', $toDate)
         ->select(
@@ -47,12 +77,141 @@ class Account extends Model
             'a.n_slno',
             'b.C_FNAME' ,
             'a.c_superadmin_status' ,
-            'a.c_admin_status'
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
         )->get();
         
 
+    }
+    public static function getRequestListUser($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+                ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+
+        ->where('a.c_superadmin_status', 'pending')  
+        ->where('a.c_admin_status', 'pending')  
+         ->whereDate('a.d_date', '>=', $fromDate)
+        ->whereDate('a.d_date', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
         
 
+    }
+
+
+    public static function getApproveList($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+                ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+
+        
+            ->where(function($query) {
+                $query->where('a.c_superadmin_status', 'approved')
+                    ->orWhere('a.c_admin_status', 'approved');
+            })
+         ->whereDate('a.d_super_approve', '>=', $fromDate)
+        ->whereDate('a.d_super_approve', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
+        
+
+    }
+
+    public static function getRejectList($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+                ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+        ->where('a.c_superadmin_status', 'rejected')  
+
+         ->whereDate('a.d_super_reject', '>=', $fromDate)
+        ->whereDate('a.d_super_reject', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
+        
+
+    }
+    public static function getRejectListAdmin($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+                ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+        ->where('a.c_admin_status', 'rejected')  
+
+         ->whereDate('a.d_admin_reject', '>=', $fromDate)
+        ->whereDate('a.d_admin_reject', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
+        
+
+    }
+    public static function getRejectListUser($fromDate, $toDate)
+    {
+        return DB::table('account_request_data as a')
+        ->join('account_employee_details as b', 'a.n_from_id', '=', 'b.n_slno')
+                ->join('account_employee_details as c', 'a.n_to_id', '=', 'c.n_slno')
+          ->where(function($query) {
+                $query->where('a.c_superadmin_status', 'rejected')
+                    ->orWhere('a.c_admin_status', 'rejected');
+            })
+
+         ->whereDate('a.d_date', '>=', $fromDate)
+        ->whereDate('a.d_date', '<=', $toDate)
+        ->select(
+            'a.c_active_user',
+            'a.n_usdt',
+            'a.n_amount_inr',
+            'a.d_date',
+            'a.n_from_id',
+            'a.n_slno',
+            'b.C_FNAME' ,
+            'a.c_superadmin_status' ,
+            'a.c_admin_status',
+            'c.C_FNAME as to_name'
+        )->get();
+        
 
     }
 
@@ -279,7 +438,7 @@ class Account extends Model
         {
             return DB::table('account_request_data')
                 ->where('n_slno', $id)
-                ->update(['c_admin_status' => 'rejected','	d_admin_reject' => now()]);
+                ->update(['c_admin_status' => 'rejected','d_admin_reject' => now()]);
 
         }
 
@@ -294,22 +453,15 @@ class Account extends Model
         public static function getWalletRequestList($fromDate, $toDate)
         {
 
-         $adminId = session('admin_id');
-
-
-          $dateColumn = 'a.d_date'; // default
-
-        if ($adminId == 1) {
-            $dateColumn = 'a.d_date';
-        } else {
-            $dateColumn = 'a.d_approve_super';  // change to your actual column name
-        }
+     
 
 
             return DB::table('account_wallet_request as a')
             ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
-           ->whereDate($dateColumn, '>=', $fromDate)
-           ->whereDate($dateColumn, '<=', $toDate)
+            ->where('a.c_admin_status', 'PENDING')  
+            ->where('a.c_superadmin_status', 'PENDING')  
+           ->whereDate('a.d_date', '>=', $fromDate)
+           ->whereDate('a.d_date', '<=', $toDate)
             ->select(
                 'a.c_description',
                 'a.n_amount',
@@ -321,6 +473,205 @@ class Account extends Model
                 'a.c_admin_status',
                 'a.n_assigned_id',
                 'a.c_admin_reject_reason',
+            )->get();
+        }
+
+
+
+        public static function getWalletApproveList($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_admin_status', 'APPROVED')  
+            ->where('a.c_superadmin_status', 'APPROVED')  
+           ->whereDate('a.d_admin_approve', '>=', $fromDate)
+           ->whereDate('a.d_admin_approve', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+            )->get();
+        }
+        public static function getWalletApproveListSuper($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_superadmin_status', 'APPROVED')  
+           ->whereDate('a.d_approve_super', '>=', $fromDate)
+           ->whereDate('a.d_approve_super', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+            )->get();
+        }
+
+        public static function getWalletApproveListAdmin($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_admin_status', 'APPROVED')  
+           ->whereDate('a.d_admin_approve', '>=', $fromDate)
+           ->whereDate('a.d_admin_approve', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+            )->get();
+        }
+
+
+
+        public static function getWalletRejectList($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+             ->where(function($query) {
+                $query->where('a.c_superadmin_status', 'REJECTED')
+                ->orWhere('a.c_admin_status', 'REJECTED');
+            }) 
+           ->whereDate('a.d_date', '>=', $fromDate)
+           ->whereDate('a.d_date', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+                'a.c_superadmin_reject_reason',
+            )->get();
+        }
+        public static function getWalletRejectListAdmin($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_admin_status', 'REJECTED')
+          
+           ->whereDate('a.d_admin_reject', '>=', $fromDate)
+           ->whereDate('a.d_admin_reject', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+                'a.c_superadmin_reject_reason',
+            )->get();
+        }
+        public static function getWalletRejectListSuper($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_superadmin_status', 'REJECTED')
+           ->whereDate('a.d_reject_super', '>=', $fromDate)
+           ->whereDate('a.d_reject_super', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+                'a.c_superadmin_reject_reason',
+            )->get();
+        }
+
+
+        public static function getWalletListSuper($fromDate, $toDate)
+        {
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_superadmin_status', 'PENDING')
+           ->whereDate('a.d_date', '>=', $fromDate)
+           ->whereDate('a.d_date', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+                'a.c_superadmin_reject_reason',
+            )->get();
+        }
+        public static function getWalletListadmin($fromDate, $toDate)
+        {
+
+           $adminid=session('admin_id');
+
+       
+            return DB::table('account_wallet_request as a')
+            ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
+            ->where('a.c_superadmin_status', 'APPROVED')
+            ->where('a.c_superadmin_status', 'PENDING')
+            ->where('a.n_assigned_id', $adminid)
+           ->whereDate('a.d_approve_super', '>=', $fromDate)
+           ->whereDate('a.d_approve_super', '<=', $toDate)
+            ->select(
+                'a.c_description',
+                'a.n_amount',
+                'a.d_date',
+                'a.n_user_id',
+                'a.n_slno',
+                'b.C_FNAME' ,
+                'a.c_superadmin_status' ,
+                'a.c_admin_status',
+                'a.n_assigned_id',
+                'a.c_admin_reject_reason',
+                'a.c_superadmin_reject_reason',
             )->get();
         }
 

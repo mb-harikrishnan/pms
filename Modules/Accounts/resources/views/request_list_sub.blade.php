@@ -13,7 +13,7 @@
 
 <div class="filter-card">
   
-    <form method="GET" action="{{ route('accounts.request_list') }}">
+    <form method="GET" action="{{ route('accounts.request_list_sub') }}">
         <div class="filter-row">
 
             <div class="filter-group">
@@ -47,7 +47,7 @@
     <div class="table-card">
       <table class="employee-table"  id="myTable">
         <thead>
-          <tr>
+        <tr>
             <th>ID</th>
             <th>Date</th>
             <th>From User</th>
@@ -55,6 +55,7 @@
             <th>Inverster</th>
             <th>USDT</th>
             <th>INR</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -63,16 +64,21 @@
           @foreach($db as $requests)
           
             <tr>
-              <td>{{ $loop->iteration }}</td>
+             <td>{{ $loop->iteration }}</td>
               <td>{{ $requests->d_date }}</td>
               <td>{{ $requests->to_name }}</td>
               <td>{{ $requests->C_FNAME }}</td>
-
+              
               <td>{{ $requests->c_active_user }}</td>
               <td>{{ $requests->n_usdt }}</td>
               <td>{{ $requests->n_amount_inr }}</td>
-              
-              
+              <td>
+                    @if($requests->c_superadmin_status == 'pending')
+                        SUPERADMIN PENDING
+                    @elseif($requests->c_superadmin_status == 'approved')
+                        SUPERADMIN APPROVED
+                    @endif
+                </td>
                 <td>
 
                   @php
@@ -81,38 +87,23 @@
                       $admin_status = $requests->c_admin_status;
                   @endphp
 
-                  {{-- ================= SUPER ADMIN (ID = 1) ================= --}}
-                  @if($adminId == 1)
+                
+                    <a href="javascript:void(0);"
+                        data-url="{{ route('accounts.approve_request_admin', ['id' => $requests->n_slno]) }}"
+                        class="btn-approve approve-btn">
+                        Approve
+                        </a>
 
-                      @if($status == 'pending')
-                          <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.approve_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve approve-btn">
-                            Approve
-                          </a>
+                        <a href="javascript:void(0);"
+                        data-url="{{ route('accounts.reject_request_admin', ['id' => $requests->n_slno]) }}"
+                        class="btn-reject reject-btn">
+                        Reject
+                    </a>
 
-                           <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.reject_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve reject-btn">
-                            Rejected
-                          </a>
-
-
-                                        @elseif($status == 'approved')
-                                <span class="status-approved">Approved</span>
-
-                            @elseif($status == 'rejected')
-                                <span class="status-rejected">Rejected</span>
-
-                            @endif
-
-                        @endif
+                  
 
 
-
-          
-
-                  </td>
+                
          
             </tr>
             

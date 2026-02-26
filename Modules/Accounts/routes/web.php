@@ -17,6 +17,42 @@ Route::post('/accounts/save_request', [AccountsController::class, 'save_request'
 Route::get('/accounts/request_list', [AccountsController::class, 'request_list'])
     ->name('accounts.request_list');
 
+Route::get('/accounts/request_list_sub', [AccountsController::class, 'request_list_sub'])
+    ->name('accounts.request_list_sub');
+
+Route::get('/accounts/request_list_user', [AccountsController::class, 'request_list_user'])
+    ->name('accounts.request_list_user');
+
+
+Route::get('/accounts/approve_list', [AccountsController::class, 'approve_list'])
+    ->name('accounts.approve_list');
+
+
+Route::get('/accounts/reject_list', [AccountsController::class, 'reject_list'])
+    ->name('accounts.reject_list');
+
+
+Route::get('/accounts/approve_list_sub', [AccountsController::class, 'approve_list_sub'])
+    ->name('accounts.approve_list_sub');
+
+
+Route::get('/accounts/reject_list_sub', [AccountsController::class, 'reject_list_sub'])
+    ->name('accounts.reject_list_sub');
+
+
+Route::get('/accounts/approve_list_user', [AccountsController::class, 'approve_list_user'])
+    ->name('accounts.approve_list_user');
+
+
+Route::get('/accounts/reject_list_user', [AccountsController::class, 'reject_list_user'])
+    ->name('accounts.reject_list_user');
+
+
+
+
+
+
+
 Route::match(['get','post'], '/accounts/approve_request/{id}', [AccountsController::class, 'approve_request']
 )->name('accounts.approve_request');
 
@@ -57,6 +93,22 @@ Route::get('/accounts/wallet_request_form', [AccountsController::class, 'wallet_
 Route::get('/accounts/wallet_request_list', [AccountsController::class, 'wallet_request_list'])
     ->name('accounts.wallet_request_list');
 
+Route::get('/accounts/wallet_approve_list', [AccountsController::class, 'wallet_approve_list'])
+    ->name('accounts.wallet_approve_list');
+
+Route::get('/accounts/wallet_reject_list', [AccountsController::class, 'wallet_reject_list'])
+    ->name('accounts.wallet_reject_list');
+
+    
+
+Route::get('/accounts/wallet_request_list_super', [AccountsController::class, 'wallet_request_list_super'])
+    ->name('accounts.wallet_request_list_super');
+
+Route::get('/accounts/wallet_request_list_admin', [AccountsController::class, 'wallet_request_list_admin'])
+    ->name('accounts.wallet_request_list_admin');
+
+
+
     Route::match(['get','post'], '/accounts/save_wallet_request', [AccountsController::class, 'save_wallet_request']
 )->name('accounts.save_wallet_request');
 
@@ -72,6 +124,21 @@ Route::match(['get','post'], '/accounts/approve_wallet_request_admin/{id}', [Acc
     
 Route::match(['get','post'], '/accounts/reject_wallet_request_admin/{id}', [AccountsController::class, 'reject_wallet_request_admin']
 )->name('accounts.reject_wallet_request_admin');
+
+
+Route::get('/accounts/wallet_approve_list_admin', [AccountsController::class, 'wallet_approve_list_admin'])
+    ->name('accounts.wallet_approve_list_admin');
+
+Route::get('/accounts/wallet_reject_list_admin', [AccountsController::class, 'wallet_reject_list_admin'])
+    ->name('accounts.wallet_reject_list_admin');
+
+Route::get('/accounts/wallet_approve_list_super', [AccountsController::class, 'wallet_approve_list_super'])
+    ->name('accounts.wallet_approve_list_super');
+
+Route::get('/accounts/wallet_reject_list_super', [AccountsController::class, 'wallet_reject_list_super'])
+    ->name('accounts.wallet_reject_list_super');
+
+    
 
 
 

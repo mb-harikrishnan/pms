@@ -4,7 +4,7 @@
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2> Requests</h2>
+      <h2>Approved Requests</h2>
     </div>
 
    @php
@@ -13,7 +13,7 @@
 
 <div class="filter-card">
   
-    <form method="GET" action="{{ route('accounts.request_list') }}">
+    <form method="GET" action="{{ route('accounts.approve_list_user') }}">
         <div class="filter-row">
 
             <div class="filter-group">
@@ -47,15 +47,13 @@
     <div class="table-card">
       <table class="employee-table"  id="myTable">
         <thead>
-          <tr>
+        <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>From User</th>
             <th>To User</th>
             <th>Inverster</th>
             <th>USDT</th>
             <th>INR</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -63,56 +61,14 @@
           @foreach($db as $requests)
           
             <tr>
-              <td>{{ $loop->iteration }}</td>
+             <td>{{ $loop->iteration }}</td>
               <td>{{ $requests->d_date }}</td>
-              <td>{{ $requests->to_name }}</td>
               <td>{{ $requests->C_FNAME }}</td>
-
+              
               <td>{{ $requests->c_active_user }}</td>
               <td>{{ $requests->n_usdt }}</td>
               <td>{{ $requests->n_amount_inr }}</td>
-              
-              
-                <td>
-
-                  @php
-                      $adminId = session('admin_id');
-                      $status  = $requests->c_superadmin_status;
-                      $admin_status = $requests->c_admin_status;
-                  @endphp
-
-                  {{-- ================= SUPER ADMIN (ID = 1) ================= --}}
-                  @if($adminId == 1)
-
-                      @if($status == 'pending')
-                          <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.approve_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve approve-btn">
-                            Approve
-                          </a>
-
-                           <a href="javascript:void(0);"
-                            data-url="{{ route('accounts.reject_request', ['id' => $requests->n_slno]) }}"
-                            class="btn-approve reject-btn">
-                            Rejected
-                          </a>
-
-
-                                        @elseif($status == 'approved')
-                                <span class="status-approved">Approved</span>
-
-                            @elseif($status == 'rejected')
-                                <span class="status-rejected">Rejected</span>
-
-                            @endif
-
-                        @endif
-
-
-
-          
-
-                  </td>
+         
          
             </tr>
             
@@ -439,84 +395,4 @@ $(document).ready(function () {
 
 
 
-
-
-  <script>
-$(document).on('click', '.approve-btn', function () {
-
-    let url = $(this).data('url');
-    let row = $(this).closest('tr');
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to approve this request!",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#16a34a',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Approve it!'
-    }).then((result) => {
-
-        if (result.isConfirmed) {
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function () {
-
-                    Swal.fire(
-                        'Approved!',
-                        'Request has been approved successfully.',
-                        'success'
-                    );
-
-                    // Update status without reload
-                    row.find('td:last').html(
-                        '<span class="status-approved">Approved</span>'
-                    );
-
-                },
-                error: function () {
-                    Swal.fire('Error', 'Something went wrong!', 'error');
-                }
-            });
-
-        }
-    });
-});
-
-
-
-    // REJECT BUTTON
-    $(document).on('click', '.reject-btn', function () {
-
-        let url = $(this).data('url');
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to reject this request!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc2626',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Yes, Reject it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-                Swal.fire(
-                    'Rejected!',
-                    'Request has been rejected.',
-                    'error'
-                ).then(() => {
-                    window.location.href = url;
-                });
-
-            }
-        });
-    });
-
-</script>
 
