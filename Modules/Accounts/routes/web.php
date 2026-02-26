@@ -7,6 +7,7 @@ use Modules\Accounts\Http\Controllers\AccountsController;
 //     Route::resource('accounts', AccountsController::class)->names('accounts');
 // });
 
+Route::middleware(['admin.auth','prevent-back-history'])->group(function () {      
 
 Route::get('/accounts/request_form', [AccountsController::class, 'request_form'])
     ->name('accounts.request_form');
@@ -144,3 +145,8 @@ Route::get('/accounts/wallet_reject_list_super', [AccountsController::class, 'wa
 
 
 
+
+
+
+
+     });
