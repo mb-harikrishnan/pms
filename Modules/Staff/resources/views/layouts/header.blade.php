@@ -502,7 +502,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 <style>
     .content-wrapper{
-        max-width: 100%;
+        max-width: 100% !important;
     }
 </style>
 
