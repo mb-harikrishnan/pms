@@ -499,5 +499,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 </script>
 
+
+<style>
+    .content-wrapper{
+        max-width: 100% !important;
+    }
+
+    a.btn-reject.reject-btn {
+      background: rgba(231, 76, 60, 0.2) !important;
+    color: #e74c3c !important;
+    border: 1px solid rgba(231, 76, 60, 0.3) !important;
+    height: 36px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0px 10px !important;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 18px 10px !important;
+}
+</style>
+
 </body>
 </html>
