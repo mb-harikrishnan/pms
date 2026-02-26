@@ -358,7 +358,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-briefcase-4-line menu-icon"></i>
-                    <span>Accounts Mgmt</span>
+                    <span>Id Activation Mgmt</span>
                 </div>
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
@@ -411,7 +411,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                 <div class="link-content">
                     <i class="ri-wallet-3-line menu-icon"></i>
-                    <span>Wallet Requests</span>
+                    <span>Amount Requests</span>
                 </div>
                 <i class="ri-arrow-down-s-line arrow-icon"></i>
             </a>
