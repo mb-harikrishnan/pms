@@ -367,8 +367,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 @if(Session('admin_id')==1)
                 <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
                 <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Request List</a></li>
-                <li><a href="{{route('accounts.approve_list')}}" class="{{ request()->routeIs('accounts.approve_list') ? 'active' : '' }}">Approve List</a></li>
-                <li><a href="{{route('accounts.reject_list')}}" class="{{ request()->routeIs('accounts.reject_list') ? 'active' : '' }}">Reject List</a></li>
+                <li><a href="{{route('accounts.approve_list')}}" class="{{ request()->routeIs('accounts.approve_list') ? 'active' : '' }}">Approved List</a></li>
+                <li><a href="{{route('accounts.reject_list')}}" class="{{ request()->routeIs('accounts.reject_list') ? 'active' : '' }}">Rejected List</a></li>
 
                 @endif
                 @if(Session('admin_id')==2)
