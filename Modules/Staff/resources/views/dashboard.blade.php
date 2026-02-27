@@ -7,7 +7,7 @@
     <!-- Welcome Section (Glassmorphism Effect) -->
     <div class="welcome-banner h-fade-in">
         <div class="welcome-content">
-            <h3><span id="greetingText">Good Morning</span>, Admin!</h3>
+            <h3><span id="greetingText">Good Morning</span>, <?php echo session('admin_username'); ?>!</h3>
             <p>Here's your daily overview. You have pending tasks to review.</p>
         </div>
         <div class="current-time">
