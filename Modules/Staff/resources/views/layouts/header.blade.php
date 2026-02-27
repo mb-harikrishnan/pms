@@ -366,7 +366,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
                 @if(Session('admin_id')==1)
                 <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Request List</a></li>
+                <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Pending List</a></li>
                 <li><a href="{{route('accounts.approve_list')}}" class="{{ request()->routeIs('accounts.approve_list') ? 'active' : '' }}">Approved List</a></li>
                 <li><a href="{{route('accounts.reject_list')}}" class="{{ request()->routeIs('accounts.reject_list') ? 'active' : '' }}">Rejected List</a></li>
 
@@ -374,18 +374,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 @if(Session('admin_id')==2)
                 
                     <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                    <li><a href="{{route('accounts.request_list_sub')}}" class="{{ request()->routeIs('accounts.request_list_sub') ? 'active' : '' }}">Request List</a></li>
-                    <li><a href="{{route('accounts.approve_list_sub')}}" class="{{ request()->routeIs('accounts.approve_list_sub') ? 'active' : '' }}">Approve List</a></li>
-                    <li><a href="{{route('accounts.reject_list_sub')}}" class="{{ request()->routeIs('accounts.reject_list_sub') ? 'active' : '' }}">Reject List</a></li>
+                    <li><a href="{{route('accounts.request_list_sub')}}" class="{{ request()->routeIs('accounts.request_list_sub') ? 'active' : '' }}">Pending List</a></li>
+                    <li><a href="{{route('accounts.approve_list_sub')}}" class="{{ request()->routeIs('accounts.approve_list_sub') ? 'active' : '' }}">Approved List</a></li>
+                    <li><a href="{{route('accounts.reject_list_sub')}}" class="{{ request()->routeIs('accounts.reject_list_sub') ? 'active' : '' }}">Rejected List</a></li>
 
                 @endif
                 @if(Session('admin_id')!=2 && Session('admin_id')!=1)
                 
 
                     <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                    <li><a href="{{route('accounts.request_list_user')}}" class="{{ request()->routeIs('accounts.request_list_user') ? 'active' : '' }}">Request List</a></li>
-                    <li><a href="{{route('accounts.approve_list_user')}}" class="{{ request()->routeIs('accounts.approve_list_user') ? 'active' : '' }}">Approve List</a></li>
-                    <li><a href="{{route('accounts.reject_list_user')}}" class="{{ request()->routeIs('accounts.reject_list_user') ? 'active' : '' }}">Reject List</a></li>
+                    <li><a href="{{route('accounts.request_list_user')}}" class="{{ request()->routeIs('accounts.request_list_user') ? 'active' : '' }}">Pending List</a></li>
+                    <li><a href="{{route('accounts.approve_list_user')}}" class="{{ request()->routeIs('accounts.approve_list_user') ? 'active' : '' }}">Approved List</a></li>
+                    <li><a href="{{route('accounts.reject_list_user')}}" class="{{ request()->routeIs('accounts.reject_list_user') ? 'active' : '' }}">Rejected List</a></li>
 
 
                  @endif
@@ -419,21 +419,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 <li><a href="{{route('accounts.wallet_request_form')}}" class="{{ request()->routeIs('accounts.wallet_request_form') ? 'active' : '' }}">Amount Request Form</a></li>
 
                 @if(Session('admin_id')==1)
-                    <li><a href="{{route('accounts.wallet_request_list_super')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Amount Request List</a></li>
+                    <li><a href="{{route('accounts.wallet_request_list_super')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
                     <li><a href="{{route('accounts.wallet_approve_list_super')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_super') ? 'active' : '' }}">Approved List</a></li>
                     <li><a href="{{route('accounts.wallet_reject_list_super')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_super') ? 'active' : '' }}">Rejected List</a></li>
 
                 @endif
                 @if(Session('admin_id')==2)
                 
-                    <li><a href="{{route('accounts.wallet_request_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Amount Request List</a></li>
+                    <li><a href="{{route('accounts.wallet_request_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
                     <li><a href="{{route('accounts.wallet_approve_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_admin') ? 'active' : '' }}">Approved List</a></li>
                     <li><a href="{{route('accounts.wallet_reject_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_admin') ? 'active' : '' }}">Rejected List</a></li>
 
                 @endif
                 @if(Session('admin_id')!=2 && Session('admin_id')!=1)
 
-                    <li><a href="{{route('accounts.wallet_request_list')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Amount Request List</a></li>
+                    <li><a href="{{route('accounts.wallet_request_list')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
                     <li><a href="{{route('accounts.wallet_approve_list')}}" class="{{ request()->routeIs('accounts.wallet_approve_list') ? 'active' : '' }}">Approved List</a></li>
                     <li><a href="{{route('accounts.wallet_reject_list')}}" class="{{ request()->routeIs('accounts.wallet_reject_list') ? 'active' : '' }}">Rejected List</a></li>
                 @endif
