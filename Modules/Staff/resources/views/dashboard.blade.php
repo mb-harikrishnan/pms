@@ -41,7 +41,7 @@
             </div>
             <div class="stat-info">
                 <h4>Wallet Balance</h4>
-                <h2>${{ number_format($walletBalance ?? 0, 2) }}</h2>
+                <h2>${{ number_format($walletBalance) }}</h2>
                 <div class="stat-trend trend-up">
                     <i class="ri-checkbox-circle-line"></i> Available Funds
                 </div>
