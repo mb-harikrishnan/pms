@@ -505,7 +505,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         max-width: 100% !important;
     }
 
-    a.btn-reject.reject-btn {
+    a.btn-reject.reject-btn,a.btn-approve.reject-btn {
       background: rgba(231, 76, 60, 0.2) !important;
     color: #e74c3c !important;
     border: 1px solid rgba(231, 76, 60, 0.3) !important;
