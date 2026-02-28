@@ -289,11 +289,31 @@ $exists = DB::table('bc_master')
 
 
 
+    // public function approve_request_expence($id)
+    // {
+     
+    //     Account::approveRequestExpence($id);
+    //     return redirect()->back()->with('success', 'Request approved successfully!');
+    // }
+
     public function approve_request_expence($id)
     {
-     
-        Account::approveRequestExpence($id);
-        return redirect()->back()->with('success', 'Request approved successfully!');
+        try {
+
+            Account::approveRequestExpence($id);
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Request approved successfully!'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
 

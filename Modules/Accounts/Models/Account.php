@@ -332,7 +332,8 @@ class Account extends Model
                 'd_approve_date'=> now()
             ]);
 
-        return back()->with('success', 'Wallet deducted successfully');
+        // return back()->with('success', 'Wallet deducted successfully');
+        return true;
     });
 }
 
@@ -659,7 +660,7 @@ class Account extends Model
             return DB::table('account_wallet_request as a')
             ->join('account_employee_details as b', 'a.n_user_id', '=', 'b.n_slno')
             ->where('a.c_superadmin_status', 'APPROVED')
-            ->where('a.c_superadmin_status', 'PENDING')
+            ->where('a.c_admin_status', 'PENDING')
             ->where('a.n_assigned_id', $adminid)
            ->whereDate('a.d_approve_super', '>=', $fromDate)
            ->whereDate('a.d_approve_super', '<=', $toDate)

@@ -458,29 +458,38 @@ $(document).on('click', '.approve-btn', function () {
         if (result.isConfirmed) {
 
             $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function () {
+            url: url,
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (response) {
 
-                    Swal.fire(
-                        'Approved!',
-                        'Request has been approved successfully.',
-                        'success'
-                    );
+                Swal.fire(
+                    'Approved!',
+                    response.message,
+                    'success'
+                );
 
-                    // Update status without reload
-                    row.find('td:last').html(
-                        '<span class="status-approved">Approved</span>'
-                    );
+                row.find('td:last').html(
+                    '<span class="status-approved">Approved</span>'
+                );
+            },
+            error: function (xhr) {
 
-                },
-                error: function () {
-                    Swal.fire('Error', 'Something went wrong!', 'error');
+                let errorMessage = 'Something went wrong!';
+
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
                 }
-            });
+
+                Swal.fire(
+                    'Error!',
+                    errorMessage,
+                    'error'
+                );
+            }
+        });
 
         }
     });
