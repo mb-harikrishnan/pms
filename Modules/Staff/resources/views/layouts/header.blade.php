@@ -518,7 +518,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 18px 10px !important;
+    white-space: nowrap;
 }
+
 </style>
 
 </body>
