@@ -51,8 +51,8 @@
             <th>ID</th>
             <th>Date</th>
             <th>Request Date</th>
-            <th>To User</th>
-            <th>Inverster</th>
+            <th>UserId Of Sender</th>
+            <th>Investor User ID</th>
             <th>USDT</th>
             <th>INR</th>
           </tr>

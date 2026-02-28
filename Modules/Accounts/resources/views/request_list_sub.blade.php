@@ -1,5 +1,5 @@
 @include('staff::layouts.header')
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <main class="admin-content">
   <div class="content-wrapper">
 
@@ -52,11 +52,11 @@
             <th>Date</th>
             <th>Request Date</th>
             <th>From User</th>
-            <th>To User</th>
-            <th>Inverster</th>
+            <th>UserId Of Sender</th>
+            <th>Investor User ID</th>
             <th>USDT</th>
             <th>INR</th>
-            <th>Status</th>
+            <th>Super Admin Approval Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -74,13 +74,20 @@
               <td>{{ $requests->c_active_user }}</td>
               <td>{{ $requests->n_usdt }}</td>
               <td>{{ $requests->n_amount_inr }}</td>
-              <td>
+                    
+
+                    <td class="text-center">
                     @if($requests->c_superadmin_status == 'pending')
-                        SUPERADMIN PENDING
+                        <i class="fa-solid fa-clock text-warning" 
+                        style="font-size:22px;" 
+                        title="Pending"></i>
                     @elseif($requests->c_superadmin_status == 'approved')
-                        SUPERADMIN APPROVED
+                        <i class="fa-solid fa-circle-check text-success" 
+                        style="font-size:22px;" 
+                        title="Approved"></i>
                     @endif
                 </td>
+
                 <td>
 
                   @php

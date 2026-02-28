@@ -52,7 +52,7 @@
             <th>Date</th>
             <th>Request Date</th>
             <th>From User</th>
-            <th>To User</th>
+            <th>UserId Of Sender</th>
             <th>Inverster</th>
             <th>USDT</th>
             <th>INR</th>

@@ -16,6 +16,21 @@ class AccountsController extends Controller
         
         return view('accounts::request_form', compact('accounts'));
     }
+
+
+public function check_userid(Request $request)
+{
+    $userid = trim($request->userid);
+$exists = DB::table('bc_master')
+            ->where('c_username', 'like', '%' . $userid . '%')
+            ->exists();
+    return response()->json($exists);
+}
+
+
+
+
+
     public function expence_form()
     {
 
@@ -317,6 +332,7 @@ class AccountsController extends Controller
             'n_amount' => $request->input('requested_amount'),
             'c_status' => 'PENDING',
             'd_date' => now(),
+            'd_requested_date' => $request->input('date') ?? now(),
         ];
 
         $db= Account :: insertWalletRequestData($savedata);

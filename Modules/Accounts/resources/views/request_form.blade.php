@@ -19,7 +19,7 @@
   <div class="form-row">
     <div class="form-group">
       <label>UserId</label>
-      <input type="text" name="userid" placeholder="Enter user id">
+      <input type="text" name="userid" id="userid" placeholder="Enter user id">
       @error('userid')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -282,14 +282,29 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
 <script>
 $(document).ready(function () {
+
+   
+
+
 
     $("#requestForm").validate({
         rules: {
             userid: {
                 required: true,
+                remote: {
+                    url: "{{ route('accounts.check_userid') }}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        userid: function () {
+                            return $("#userid").val();
+                        }
+                    }
+                }
             },
             usdt: {
                 required: true,
@@ -301,16 +316,14 @@ $(document).ready(function () {
             },
             to_id: {  
                 required: true,
-                digits: true,
-            
-            },
-           
-            
+                digits: true
+            }
         },
 
         messages: {
-              userid: {
+            userid: {
                 required: "User ID is required",
+                remote: "User ID does not exist"
             },
             usdt: {
                 required: "USDT amount is required",
@@ -321,9 +334,8 @@ $(document).ready(function () {
                 number: "Enter a valid number"
             },
             to_id: {  
-                required: "To ID is required",
-            },
-            
+                required: "To ID is required"
+            }
         },
 
         errorElement: "small",
@@ -331,8 +343,7 @@ $(document).ready(function () {
     });
 
 });
-</script> 
-
+</script>
 
 
 

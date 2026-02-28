@@ -50,8 +50,9 @@
         <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>To User</th>
-            <th>Inverster</th>
+              <th>From User</th>
+            <th>UserId Of Sender</th>
+            <th>Investor User ID</th>
             <th>USDT</th>
             <th>INR</th>
           </tr>
@@ -63,6 +64,7 @@
             <tr>
              <td>{{ $loop->iteration }}</td>
               <td>{{ $requests->d_date }}</td>
+               <td>{{ $requests->to_name }}</td>
               <td>{{ $requests->C_FNAME }}</td>
               
               <td>{{ $requests->c_active_user }}</td>

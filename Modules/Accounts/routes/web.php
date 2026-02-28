@@ -12,6 +12,10 @@ Route::middleware(['admin.auth','prevent-back-history'])->group(function () {
 Route::get('/accounts/request_form', [AccountsController::class, 'request_form'])
     ->name('accounts.request_form');
 
+
+Route::match(['get','post'], '/accounts/check_userid', [AccountsController::class, 'check_userid'])
+    ->name('accounts.check_userid');
+
 Route::post('/accounts/save_request', [AccountsController::class, 'save_request'])
     ->name('accounts.save_request');
 
