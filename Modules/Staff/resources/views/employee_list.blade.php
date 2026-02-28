@@ -16,6 +16,7 @@
             <th>Email</th>
             <th>Mobile</th>
             <th>Role</th>
+            <th>UserName</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
               <td>{{ $employee->C_EMAIL }}</td>
               <td>{{ $employee->N_MOBILE }}</td>
               <td>{{ $employee->C_ROLE }}</td>
+              <td>{{ $employee->C_USERNAME }}</td>
             </tr>
             
           @endforeach
