@@ -34,21 +34,7 @@
             <div class="hover-circle"></div>
         </a>
 
-        <!-- Wallet Balance Card (New Widget) -->
-        <div class="stat-card h-slide-up" style="animation-delay: 0.2s;">
-            <div class="stat-icon-wrapper green-glow">
-                <i class="ri-wallet-3-line"></i>
-            </div>
-            <div class="stat-info">
-                <h4>Wallet Balance</h4>
-                <h2>${{ number_format($walletBalance) }}</h2>
-                <div class="stat-trend trend-up">
-                    <i class="ri-checkbox-circle-line"></i> Available Funds
-                </div>
-            </div>
-            <div class="hover-circle"></div>
-        </div>
-
+    
         <!-- Add Employee Card -->
         <a href="{{ route('staff.add_employee') }}" class="stat-card h-slide-up" style="animation-delay: 0.3s;">
             <div class="stat-icon-wrapper gold-glow">

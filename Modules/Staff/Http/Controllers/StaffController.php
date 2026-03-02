@@ -24,11 +24,9 @@ public function dashboard()
     $userid = session('admin_id');
 
     $employeeCount = Employee::count();
-    $walletBalance= DB :: table ('account_wallet_master')
-                          ->where('n_user_id' ,$userid )
-                           ->value('n_amount') ?? 0;
+  
     
-    return view('staff::dashboard', compact('employeeCount','walletBalance'));
+    return view('staff::dashboard', compact('employeeCount'));
 }
 
 
