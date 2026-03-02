@@ -13,7 +13,7 @@ class Employee extends Model
 
 
 
-    protected $table = 'account_employee_details';
+    protected $table = 'pms_employee_details';
 
     protected $primaryKey = 'n_slno';
 

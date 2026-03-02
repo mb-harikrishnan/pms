@@ -25,7 +25,7 @@ public function login_check(Request $request)
         'password' => 'required|min:6',
     ]);
 
-    $admin = DB::table('account_login_details')
+    $admin = DB::table('pms_login_details')
         ->where('c_username', $request->username)
         ->first();
 
@@ -39,7 +39,7 @@ public function login_check(Request $request)
     }
 
     // ✅ Update last login time
-    DB::table('account_login_details')
+    DB::table('pms_login_details')
         ->where('n_admin_id', $admin->n_admin_id)
         ->update([
             'd_last_login' => now(),

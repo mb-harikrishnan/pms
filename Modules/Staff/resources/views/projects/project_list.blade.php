@@ -4,7 +4,7 @@
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2>Employee List</h2>
+      <h2>Project List</h2>
     </div>
 
     <div class="table-card">
@@ -12,26 +12,21 @@
         <thead>
             <tr>
               <th>ID</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Mobile</th>
-              <th>Role</th>
-              <th>UserName</th>
+              <th>Name</th>
+              <th>Parent </th>
               <th>Edit</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
               
-            @foreach($employees as $employee)
+            @foreach($projects as $project)
             
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $employee->C_FNAME }}</td>
-                <td>{{ $employee->C_EMAIL }}</td>
-                <td>{{ $employee->N_MOBILE }}</td>
-                <td>{{ $employee->department_name }}</td>
-                <td>{{ $employee->C_USERNAME }}</td>
+                <td>{{ $employee->c_project_name }}</td>
+                <td>{{ $employee->name }}</td>
+           
 
 
                  <!-- EDIT BUTTON -->

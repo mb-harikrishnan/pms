@@ -1,92 +1,65 @@
 @include('staff::layouts.header')
 
+
 <main class="admin-content">
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2>Employee List</h2>
+      <h2>Department List</h2>
     </div>
 
     <div class="table-card">
       <table class="employee-table"  id="myTable">
         <thead>
-            <tr>
-              <th>ID</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Mobile</th>
-              <th>Role</th>
-              <th>UserName</th>
-              <th>Edit</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-              
-            @foreach($employees as $employee)
+          <tr>
+            <th>ID</th>
+            <th>Department</th>
+            <th>CODE</th>
+            <th>DESCRIPTION</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
             
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $employee->C_FNAME }}</td>
-                <td>{{ $employee->C_EMAIL }}</td>
-                <td>{{ $employee->N_MOBILE }}</td>
-                <td>{{ $employee->department_name }}</td>
-                <td>{{ $employee->C_USERNAME }}</td>
+          @foreach($departments as $values)
+          
+            <tr>
+              <td>{{ $loop->iteration }}</td>
+              <td>{{ $values->C_NAME }}</td>
+              <td>{{ $values->C_CODE }}</td>
+              <td>{{ $values->C_DESCRIPTION }}</td>
+              <td>
+                    {{-- <a href="{{ route('staff.delete_employee', $values->n_dept_id) }}" class="btn-edit">
+                        Delete
+                    </a> --}}
+                    <a href="{{ route('staff.delete_employee', $values->n_dept_id) }}"
+                    class="btn-edit"
+                        onclick="return confirmDelete(event)">
+                            Delete
+                    </a>
+                </td>
 
-
-                 <!-- EDIT BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.edit_employee', $employee->n_slno) }}" 
-                        class="btn-edit">
-                          Edit
-                      </a>
-                  </td>
-
-                  <!-- DELETE BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.delete_employee_id', $employee->n_slno) }}"
-                        class="btn-remove"
-                            onclick="return confirmDelete(event)">
-                                Delete
-                        </a>
-                  </td>
-              </tr>
-              
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-
+            </tr>
+            
+          @endforeach
+        </tbody>
+      </table>
     </div>
-  </main>
+
+  </div>
+</main>
 
 
 
 <style>
+
+
 .btn-edit {
     display: inline-block;
     padding: 6px 14px;
     font-size: 13px;
     font-weight: 600;
-   color: #f97316;  /* orenge */
-border-left: 4px solid #f97316; 
-   border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    background: transparent;
-    border: 2px solid #f97316;
-}
-
-.btn-edit:hover {
-    background: #f97316;
-    color: #fff;
-}
-  .btn-remove {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #dc2626; 
+    color: #dc2626;
     border: 1px solid #dc2626;
     border-radius: 6px;
     text-decoration: none;
@@ -94,10 +67,11 @@ border-left: 4px solid #f97316;
     background: transparent;
 }
 
-.btn-remove:hover {
+.btn-edit:hover {
     background: #dc2626;
     color: #fff;
 }
+
 .admin-content {
   margin-left: 260px;
   padding: 100px 60px 40px;
@@ -257,8 +231,6 @@ $(document).ready(function () {
     $('#myTable').DataTable();
 });
 </script>
-
-
 
 
 <script>

@@ -11,68 +11,35 @@
 
     <!-- Form Card -->
     <div class="form-card">
-      <form method="POST" action="{{route('staff.save_employee')}}" id="employeeForm">
+      <form method="POST" action="{{route('staff.save_project')}}" id="projectForm">
   @csrf
 
   <div class="form-row">
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" name="fullname" placeholder="Enter full name">
-      @error('fullname')
-        <small class="error-text">{{ $message }}</small>
-      @enderror
-    </div>
+      <div class="form-group">
+        <label>Project Name <span style="color:red">*</span></label>
+        <input type="text" name="project_name" placeholder="Enter project name">
+        @error('project_name')
+          <small class="error-text">{{ $message }}</small>
+        @enderror
+      </div>
 
-    <div class="form-group">
-      <label>Mobile Number</label>
-      <input type="text" name="mobile" placeholder="Enter mobile number">
-      @error('mobile')
-        <small class="error-text">{{ $message }}</small>
-      @enderror
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" name="email" placeholder="Enter email address">
-      @error('email')
-        <small class="error-text">{{ $message }}</small>
-      @enderror
-    </div>
-
+   
 
       <div class="form-group">
-  <label>Select Role</label>
-  <select name="role" id="role" style="width:100%">
-      <option value="">-- Select Role --</option>
-  </select>
+        <label>Select Parent</label>
+        <select name="parent" id="parent" style="width:100%">
+            <option value="">-- Select Parent --</option>
+            <option value="0">-- No Parent --</option>
+        </select>
 
-  @error('role')
-    <small class="error-text">{{ $message }}</small>
-  @enderror
-</div>
+        @error('parent')
+          <small class="error-text">{{ $message }}</small>
+        @enderror
+      </div>
 
     
   </div>
 
-<div class="form-row">
-  <div class="form-group">
-      <label>Username</label>
-      <input type="text" name="username" placeholder="Enter username"  autocomplete="new-username">
-      @error('username')
-        <small class="error-text">{{ $message }}</small>
-      @enderror
-    </div>
-
-
-    <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" placeholder="Enter password" autocomplete="new-password">
-    @error('password')
-      <small class="error-text">{{ $message }}</small>
-    @enderror
-  </div>
 
 
 
@@ -342,72 +309,51 @@
 
 
 <script>
-  
-$(document).ready(function () {
-
-    $("#employeeForm").validate({
-        rules: {
-            fullname: {
-                required: true,
-                minlength: 3
-            },
-            mobile: {
-                required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 10
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            username: {
-                required: true,
-                minlength: 4
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-             role: {
-                required: true
-            }
+$("#projectForm").validate({
+    rules: {
+        project_name: {
+            required: true,
+            minlength: 3
         },
-
-        messages: {
-            fullname: {
-                required: "Full name is required",
-                minlength: "Minimum 3 characters"
-            },
-            mobile: {
-                required: "Mobile number is required",
-                digits: "Only numbers allowed",
-                minlength: "Must be 10 digits",
-                maxlength: "Must be 10 digits"
-            },
-            email: {
-                required: "Email is required",
-                email: "Enter valid email"
-            },
-            username: {
-                required: "Username required",
-                minlength: "Minimum 4 characters"
-            },
-            password: {
-                required: "Password required",
-                minlength: "Minimum 6 characters"
-            },
-             role: {
-                required: "Please select a role"
-            }
+        parent: {
+            required: true,
         },
+    },
 
-        errorElement: "small",
-        errorClass: "error-text"
-    });
+    messages: {
+        project_name: {
+            required: "Project name is required",
+            minlength: "Minimum 3 characters"
+        },
+        parent: {
+            required: "Project Parent is required",
+        },
+    },
 
+    errorElement: "small",
+    errorClass: "error-text",
+
+    errorPlacement: function(error, element) {
+
+        // ✅ If Select2 field
+        if (element.hasClass("select2-hidden-accessible")) {
+            error.insertAfter(element.next('.select2')); 
+        } 
+        // Normal input fields
+        else {
+            error.insertAfter(element);
+        }
+    },
+
+    submitHandler: function(form) {
+        form.submit();
+    }
 });
 </script>
+
+
+
+
 
 
 
@@ -440,37 +386,37 @@ Swal.fire({
 
 
 <script>
-$(document).ready(function () {
+$('#parent').select2({
+    width: '100%',
+    placeholder: "-- Select Parent --",
+    allowClear: true,
+    ajax: {
+        url: "{{ route('staff.get_project_parent') }}",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+                search: params.term
+            };
+        },
+        processResults: function (data) {
 
-    // Initialize Select2
-    $('#role').select2({
-        width: '100%',
-        placeholder: "-- Select Role --",
-        allowClear: true,
-        ajax: {
-            url: "{{ route('staff.get_roles') }}",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    search: params.term
-                };
-            },
-            processResults: function (data) {
-                return {
-                    results: data
-                };
-            }
+            // ✅ Add No Parent option manually
+            let results = [
+                { id: 0, text: '-- No Parent --' }
+            ];
+
+            // Append AJAX data
+            return {
+                results: results.concat(data)
+            };
         }
-    });
-
-    // Trigger validation when Select2 changes
-    $('#role').on('change', function () {
-        $(this).valid();
-    });
-
+    }
 });
 </script>
+
+
+
 
 </body>
 </html>

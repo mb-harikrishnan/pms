@@ -6,18 +6,18 @@
 
     <!-- Page Header -->
     <div class="page-header">
-      <h2>Add New Employee</h2>
+      <h2>Edit Employee</h2>
     </div>
 
     <!-- Form Card -->
     <div class="form-card">
-      <form method="POST" action="{{route('staff.save_employee')}}" id="employeeForm">
+      <form method="POST" action="{{ route('staff.update_employee', $employee->n_slno) }}" id="employeeForm">
   @csrf
 
   <div class="form-row">
     <div class="form-group">
       <label>Full Name</label>
-      <input type="text" name="fullname" placeholder="Enter full name">
+      <input type="text" name="fullname" placeholder="Enter full name" value="{{ old('fullname', $employee->C_FNAME) }}">
       @error('fullname')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -25,7 +25,8 @@
 
     <div class="form-group">
       <label>Mobile Number</label>
-      <input type="text" name="mobile" placeholder="Enter mobile number">
+      <input type="text" name="mobile" placeholder="Enter mobile number"  value="{{ old('mobile', $employee->N_MOBILE) }}"
+>
       @error('mobile')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -35,7 +36,8 @@
   <div class="form-row">
     <div class="form-group">
       <label>Email Address</label>
-      <input type="email" name="email" placeholder="Enter email address">
+      <input type="email" name="email" placeholder="Enter email address"  value="{{ old('email', $employee->C_EMAIL) }}"
+>
       @error('email')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -59,7 +61,8 @@
 <div class="form-row">
   <div class="form-group">
       <label>Username</label>
-      <input type="text" name="username" placeholder="Enter username"  autocomplete="new-username">
+      <input type="text" name="username" placeholder="Enter username" value="{{ old('username', $employee->C_USERNAME) }}"
+>
       @error('username')
         <small class="error-text">{{ $message }}</small>
       @enderror
@@ -366,7 +369,6 @@ $(document).ready(function () {
                 minlength: 4
             },
             password: {
-                required: true,
                 minlength: 6
             },
              role: {
@@ -394,7 +396,6 @@ $(document).ready(function () {
                 minlength: "Minimum 4 characters"
             },
             password: {
-                required: "Password required",
                 minlength: "Minimum 6 characters"
             },
              role: {
@@ -436,13 +437,9 @@ Swal.fire({
 </script>
 @endif
 
-
-
-
 <script>
 $(document).ready(function () {
 
-    // Initialize Select2
     $('#role').select2({
         width: '100%',
         placeholder: "-- Select Role --",
@@ -464,12 +461,17 @@ $(document).ready(function () {
         }
     });
 
-    // Trigger validation when Select2 changes
-    $('#role').on('change', function () {
-        $(this).valid();
-    });
+    // Preselect existing role
+    var roleId = "{{ $employee->C_ROLE }}";
+    var roleText = "{{ $employee->department_name }}";
+
+    if (roleId && roleText) {
+        var option = new Option(roleText, roleId, true, true);
+        $('#role').append(option).trigger('change');
+    }
 
 });
+
 </script>
 
 </body>

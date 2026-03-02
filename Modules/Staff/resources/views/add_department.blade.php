@@ -1,71 +1,49 @@
 
 @include('staff::layouts.header')
-
-
 <main class="admin-content">
 
   <div class="content-wrapper">
 
     <!-- Page Header -->
     <div class="page-header">
-      <h2>ID Activation Request</h2>
+      <h2>Add New Department</h2>
     </div>
 
     <!-- Form Card -->
     <div class="form-card">
-      <form method="POST" action="{{route('accounts.save_request')}}" id="requestForm">
+    <form method="POST" action="{{ route('staff.save_department') }}" id="departmentForm">
   @csrf
 
   <div class="form-row">
     <div class="form-group">
-      <label>UserId</label>
-      <input type="text" name="userid" placeholder="Enter user id">
-      @error('userid')
+      <label>Department Name <span style="color:red">*</span></label>
+      <input type="text" name="department_name" placeholder="Enter department name">
+      @error('department_name')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
 
     <div class="form-group">
-      <label>Number Of USDT</label>
-      <input type="text" name="usdt" placeholder="Enter number of USDT">
-      @error('usdt')
+      <label>Department Code <span style="color:red">*</span></label>
+      <input type="text" name="department_code" placeholder="Enter department code">
+      @error('department_code')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
   </div>
 
   <div class="form-row">
-    <div class="form-group">
-      <label>Amount In INR</label>
-      <input type="text" name="amount_inr" placeholder="Enter amount in INR" readonly >
-      @error('amount_inr')
+    <div class="form-group" style="width:100%;">
+      <label>Description <span style="color:red">*</span></label>
+      <textarea name="description" placeholder="Enter department description" rows="4"></textarea>
+      @error('description')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
-
-      <div class="form-group">
-        <label>To Id</label>
-        <select name="to_id">
-            <option value="">-- Select To ID --</option>
-            @foreach ($accounts as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select>
-
-        @error('to_id')
-            <small class="error-text">{{ $message }}</small>
-        @enderror
-    </div>
-
-    
   </div>
 
-
-
-  <button type="submit" class="save-btn">Save Request</button>
+  <button type="submit" class="save-btn">Save Department</button>
 </form>
-
-
     </div>
 
   </div>
@@ -75,35 +53,35 @@
 
 <style>
 
-.error-text
-{
-  box-sizing: border-box;
-  color: #e11d48;
+.error-text {
+  color: #ff5b5b;
   font-size: 12px;
+  margin-top: 6px;
+  display: block;   
+  font-weight: 500;
 }
 
   /* Main admin area */
 .admin-content {
-  margin-left: 260px;      /* sidebar width */
-  padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
-    background: radial-gradient(circle at top left, #1a1a1d, #09090b);
+  margin-left: 260px;
+  padding: 100px 60px 40px;
+  background: #ffffff;
   min-height: 100vh;
 }
 
 
 
 
-
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #D4AF37; /* Primary Gold */
+  border-left: 4px solid #dc2626; /* Red */
   padding-left: 20px;
 }
 
 .page-header h2 {
   font-family: 'Cinzel', serif;
   font-size: 28px;
-  color: #D4AF37;
+  color: #dc2626; /* Red */
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
@@ -115,10 +93,10 @@
 
 /* 2. Dark Glass-like Form Card */
 .form-card {
-  background: #121214;
+  background: #ffffff;
   padding: 40px;
   border-radius: 20px;
-  border: 1px solid #27272A; /* Dark Border */
+  border: 1px solid #e5e7eb; /* Dark Border */
   box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Deep Shadow */
 }
 
@@ -148,7 +126,7 @@
 }
 
 .form-group label {
-  color: #A1A1AA;
+  color: #374151;
   font-size: 13px;
   margin-bottom: 8px;
   display: block;
@@ -166,7 +144,7 @@
 .input-wrapper i {
   position: absolute;
   left: 15px;
-  color: #D4AF37; /* Gold Icon */
+  color: #dc2626; /* Gold Icon */
   font-size: 18px;
   pointer-events: none;
   transition: 0.3s;
@@ -177,13 +155,15 @@
 .form-group select,.form-group textarea {
   width: 100%;
   padding: 14px 14px 14px 14px; /* Left padding space for the icon */
-  background: rgba(255, 255, 255, 0.03); /* Slight transparency */
-  border: 1px solid #27272A;
+  border-color: #dc2626;
+  background: #ffffff;
+  box-shadow: none;
   border-radius: 10px;
-  color: #FFFFFF;
+  color: #111827;
   font-size: 14px;
   transition: all 0.3s;
   outline: none;
+   border: 1px solid #d1d5db;
 }
 
 /* Hover & Focus Effects */
@@ -194,7 +174,7 @@
 
 .form-group input:focus, 
 .form-group select:focus, .form-group textarea:focus {
-  border-color: #D4AF37; /* Gold Border on Click */
+  border-color: #dc2626; /* Gold Border on Click */
   background: rgba(212, 175, 55, 0.05); /* Soft Gold Tint */
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); /* Glow Effect */
 }
@@ -217,26 +197,22 @@
   margin-top: 25px;
   padding: 16px;
   border-radius: 12px;
-  border: none;
+  border: 2px solid #dc2626;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #000; /* Black text on gold is best for contrast */
+  color: #dc2626; /* Red Text */
   cursor: pointer;
-  background: linear-gradient(135deg, #D4AF37, #F3E5AB); /* Gold to Light Gold */
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
+  background: #ffffff; /* White background */
+  transition: all 0.3s ease;
 }
 
 .save-btn:hover {
+  background: #dc2626; /* Red background */
+  color: #ffffff; /* White text */
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35); /* Stronger glow on hover */
-  filter: brightness(1.1);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.35);
 }
 
 .save-btn:active {
@@ -265,63 +241,57 @@
 
 </style>
 
-
-
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script> 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
 $(document).ready(function () {
 
-    $("#requestForm").validate({
+    $("#departmentForm").validate({
         rules: {
-            userid: {
+            department_name: {
                 required: true,
+                minlength: 3
             },
-            usdt: {
+            department_code: {
                 required: true,
-                number: true
+                minlength: 10
             },
-            amount_inr: {
+            description: {
                 required: true,
-                number: true
-            },
-            to_id: {  
-                required: true,
-                digits: true,
-            
-            },
-           
-            
+                minlength: 10
+            }
         },
 
         messages: {
-              userid: {
-                required: "User ID is required",
+            department_name: {
+                required: "Department name is required",
+                minlength: "Minimum 3 characters"
             },
-            usdt: {
-                required: "USDT amount is required",
-                number: "Enter a valid number"
+            department_code: {
+                required: "Department code is required",
+                digits: "Only numbers allowed",
+                minlength: "Must be 10 digits"
             },
-            amount_inr: {
-                required: "INR amount is required",
-                number: "Enter a valid number"
-            },
-            to_id: {  
-                required: "To ID is required",
-            },
-            
+            description: {
+                required: "Description is required",
+                minlength: "Minimum 10 characters"
+            }
         },
 
         errorElement: "small",
-        errorClass: "error-text"
+        errorClass: "error-text",
+        submitHandler: function(form) {
+            form.submit();  // only submit if valid
+        }
     });
 
 });
-</script> 
+
+</script>
+
 
 
 
@@ -352,22 +322,7 @@ Swal.fire({
 
 
 
-<script>
-$(document).ready(function () {
 
-    let usdtRate = 83; // 🔥 Change this to current USDT rate
 
-    $("input[name='usdt']").on("keyup change", function () {
-
-        let usdt = parseFloat($(this).val());
-
-        if (!isNaN(usdt)) {
-            let inr = usdt * usdtRate;
-            $("input[name='amount_inr']").val(inr.toFixed(2));
-        } else {
-            $("input[name='amount_inr']").val('');
-        }
-    });
-
-});
-</script>
+</body>
+</html>
