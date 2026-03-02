@@ -1,64 +1,81 @@
 
 @include('staff::layouts.header')
+
+
 <main class="admin-content">
 
   <div class="content-wrapper">
 
     <!-- Page Header -->
     <div class="page-header">
-<<<<<<< HEAD:Modules/Staff/resources/views/add_department.blade.php
-      <h2>Add New Department</h2>
-=======
-      <h2>Amount Request</h2>
->>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4:Modules/Accounts/resources/views/wallet_request_form.blade.php
+      <h2>ID Activation Request</h2>
     </div>
 
     <!-- Form Card -->
     <div class="form-card">
-    <form method="POST" action="{{ route('staff.save_department') }}" id="departmentForm">
+      <form method="POST" action="{{route('accounts.save_request')}}" id="requestForm">
   @csrf
 
   <div class="form-row">
     <div class="form-group">
-      <label>Department Name <span style="color:red">*</span></label>
-      <input type="text" name="department_name" placeholder="Enter department name">
-      @error('department_name')
+      <label>UserId</label>
+      <input type="text" name="userid" id="userid" placeholder="Enter user id">
+      @error('userid')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
 
     <div class="form-group">
-      <label>Department Code <span style="color:red">*</span></label>
-      <input type="text" name="department_code" placeholder="Enter department code">
-      @error('department_code')
+      <label>Number Of USDT</label>
+      <input type="text" name="usdt" placeholder="Enter number of USDT">
+      @error('usdt')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
-
-       <div class="form-group">
-          <label>Select Date</label>
-          <input type="date" name="date" class="form-control" value="{{ old('date', date('Y-m-d')) }}">
-
-          
-          @error('date')
-              <small class="error-text">{{ $message }}</small>
-          @enderror
-      </div>
-
   </div>
 
   <div class="form-row">
-    <div class="form-group" style="width:100%;">
-      <label>Description <span style="color:red">*</span></label>
-      <textarea name="description" placeholder="Enter department description" rows="4"></textarea>
-      @error('description')
+    <div class="form-group">
+      <label>Amount In INR</label>
+      <input type="text" name="amount_inr" placeholder="Enter amount in INR"   >
+      @error('amount_inr')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
+
+      <div class="form-group">
+        <label>To Id</label>
+        <select name="to_id">
+            <option value="">-- Select To ID --</option>
+            @foreach ($accounts as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
+
+        @error('to_id')
+            <small class="error-text">{{ $message }}</small>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label>Select Date</label>
+        <input type="date" name="date" class="form-control"value="{{ old('date', date('Y-m-d')) }}">
+
+        
+        @error('date')
+            <small class="error-text">{{ $message }}</small>
+        @enderror
+    </div>
+
+    
   </div>
 
-  <button type="submit" class="save-btn">Save Department</button>
+
+
+  <button type="submit" class="save-btn">Save Request</button>
 </form>
+
+
     </div>
 
   </div>
@@ -68,35 +85,35 @@
 
 <style>
 
-.error-text {
-  color: #ff5b5b;
+.error-text
+{
+  box-sizing: border-box;
+  color: #e11d48;
   font-size: 12px;
-  margin-top: 6px;
-  display: block;   
-  font-weight: 500;
 }
 
   /* Main admin area */
 .admin-content {
-  margin-left: 260px;
-  padding: 100px 60px 40px;
-  background: #ffffff;
+  margin-left: 260px;      /* sidebar width */
+  padding: 100px 60px 40px; /* ⬅️ TOP padding for header */
+    background: radial-gradient(circle at top left, #1a1a1d, #09090b);
   min-height: 100vh;
 }
 
 
 
 
+
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Red */
+  border-left: 4px solid #D4AF37; /* Primary Gold */
   padding-left: 20px;
 }
 
 .page-header h2 {
   font-family: 'Cinzel', serif;
   font-size: 28px;
-  color: #dc2626; /* Red */
+  color: #D4AF37;
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
@@ -108,10 +125,10 @@
 
 /* 2. Dark Glass-like Form Card */
 .form-card {
-  background: #ffffff;
+  background: #121214;
   padding: 40px;
   border-radius: 20px;
-  border: 1px solid #e5e7eb; /* Dark Border */
+  border: 1px solid #27272A; /* Dark Border */
   box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Deep Shadow */
 }
 
@@ -141,7 +158,7 @@
 }
 
 .form-group label {
-  color: #374151;
+  color: #A1A1AA;
   font-size: 13px;
   margin-bottom: 8px;
   display: block;
@@ -159,7 +176,7 @@
 .input-wrapper i {
   position: absolute;
   left: 15px;
-  color: #dc2626; /* Gold Icon */
+  color: #D4AF37; /* Gold Icon */
   font-size: 18px;
   pointer-events: none;
   transition: 0.3s;
@@ -170,15 +187,13 @@
 .form-group select,.form-group textarea {
   width: 100%;
   padding: 14px 14px 14px 14px; /* Left padding space for the icon */
-  border-color: #dc2626;
-  background: #ffffff;
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.03); /* Slight transparency */
+  border: 1px solid #27272A;
   border-radius: 10px;
-  color: #111827;
+  color: #FFFFFF;
   font-size: 14px;
   transition: all 0.3s;
   outline: none;
-   border: 1px solid #d1d5db;
 }
 
 /* Hover & Focus Effects */
@@ -189,7 +204,7 @@
 
 .form-group input:focus, 
 .form-group select:focus, .form-group textarea:focus {
-  border-color: #dc2626; /* Gold Border on Click */
+  border-color: #D4AF37; /* Gold Border on Click */
   background: rgba(212, 175, 55, 0.05); /* Soft Gold Tint */
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); /* Glow Effect */
 }
@@ -212,22 +227,26 @@
   margin-top: 25px;
   padding: 16px;
   border-radius: 12px;
-  border: 2px solid #dc2626;
+  border: none;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #dc2626; /* Red Text */
+  color: #000; /* Black text on gold is best for contrast */
   cursor: pointer;
-  background: #ffffff; /* White background */
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #D4AF37, #F3E5AB); /* Gold to Light Gold */
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15);
 }
 
 .save-btn:hover {
-  background: #dc2626; /* Red background */
-  color: #ffffff; /* White text */
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35); /* Stronger glow on hover */
+  filter: brightness(1.1);
 }
 
 .save-btn:active {
@@ -256,58 +275,75 @@
 
 </style>
 
+
+
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script> 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 $(document).ready(function () {
 
-    $("#departmentForm").validate({
+   
+
+
+
+    $("#requestForm").validate({
         rules: {
-            department_name: {
+            userid: {
                 required: true,
-                minlength: 3
+                remote: {
+                    url: "{{ route('accounts.check_userid') }}",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        userid: function () {
+                            return $("#userid").val();
+                        }
+                    }
+                }
             },
-            department_code: {
+            usdt: {
                 required: true,
-                minlength: 10
+                number: true
             },
-            description: {
+            amount_inr: {
                 required: true,
-                minlength: 10
+                number: true
+            },
+            to_id: {  
+                required: true,
+                digits: true
             }
         },
 
         messages: {
-            department_name: {
-                required: "Department name is required",
-                minlength: "Minimum 3 characters"
+            userid: {
+                required: "User ID is required",
+                remote: "User ID does not exist"
             },
-            department_code: {
-                required: "Department code is required",
-                digits: "Only numbers allowed",
-                minlength: "Must be 10 digits"
+            usdt: {
+                required: "USDT amount is required",
+                number: "Enter a valid number"
             },
-            description: {
-                required: "Description is required",
-                minlength: "Minimum 10 characters"
+            amount_inr: {
+                required: "INR amount is required",
+                number: "Enter a valid number"
+            },
+            to_id: {  
+                required: "To ID is required"
             }
         },
 
         errorElement: "small",
-        errorClass: "error-text",
-        submitHandler: function(form) {
-            form.submit();  // only submit if valid
-        }
+        errorClass: "error-text"
     });
 
 });
-
 </script>
-
-
 
 
 
@@ -337,7 +373,22 @@ Swal.fire({
 
 
 
+<script>
+$(document).ready(function () {
 
+    let usdtRate = 83; // 🔥 Change this to current USDT rate
 
-</body>
-</html>
+    $("input[name='usdt']").on("keyup change", function () {
+
+        let usdt = parseFloat($(this).val());
+
+        if (!isNaN(usdt)) {
+            let inr = usdt * usdtRate;
+            $("input[name='amount_inr']").val(inr.toFixed(2));
+        } else {
+            $("input[name='amount_inr']").val('');
+        }
+    });
+
+});
+</script>

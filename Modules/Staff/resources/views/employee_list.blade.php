@@ -10,6 +10,7 @@
     <div class="table-card">
       <table class="employee-table"  id="myTable">
         <thead>
+<<<<<<< HEAD
             <tr>
               <th>ID</th>
               <th>Full Name</th>
@@ -19,6 +20,28 @@
               <th>UserName</th>
               <th>Edit</th>
               <th>Remove</th>
+=======
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Role</th>
+            <th>UserName</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+          @foreach($employees as $employee)
+          
+            <tr>
+              <td>{{ $loop->iteration }}</td>
+              <td>{{ $employee->C_FNAME }}</td>
+              <td>{{ $employee->C_EMAIL }}</td>
+              <td>{{ $employee->N_MOBILE }}</td>
+              <td>{{ $employee->C_ROLE }}</td>
+              <td>{{ $employee->C_USERNAME }}</td>
+>>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
             </tr>
           </thead>
           <tbody>

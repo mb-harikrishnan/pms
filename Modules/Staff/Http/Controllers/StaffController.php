@@ -20,10 +20,24 @@ class StaffController extends Controller
     public function dashboard()
     {
 
+<<<<<<< HEAD
         $employeeCount = Employee::count();
         
         return view('staff::dashboard', compact('employeeCount'));
     }
+=======
+public function dashboard()
+{
+    $userid = session('admin_id');
+
+    $employeeCount = Employee::count();
+    $walletBalance= DB :: table ('account_wallet_master')
+                          ->where('n_user_id' ,$userid )
+                           ->value('n_amount') ?? 0;
+    
+    return view('staff::dashboard', compact('employeeCount','walletBalance'));
+}
+>>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
 
 
     ///////////////////////  EMPLOYEE MANAGMENT  ///////////////////

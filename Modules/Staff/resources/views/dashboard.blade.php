@@ -7,7 +7,7 @@
     <!-- Welcome Section (Glassmorphism Effect) -->
     <div class="welcome-banner h-fade-in">
         <div class="welcome-content">
-            <h3><span id="greetingText">Good Morning</span>, Admin!</h3>
+            <h3><span id="greetingText">Good Morning</span>, <?php echo session('admin_username'); ?>!</h3>
             <p>Here's your daily overview. You have pending tasks to review.</p>
         </div>
         <div class="current-time">
@@ -34,8 +34,23 @@
             <div class="hover-circle"></div>
         </a>
 
+        <!-- Wallet Balance Card (New Widget) -->
+        <div class="stat-card h-slide-up" style="animation-delay: 0.2s;">
+            <div class="stat-icon-wrapper green-glow">
+                <i class="ri-wallet-3-line"></i>
+            </div>
+            <div class="stat-info">
+                <h4>Wallet Balance</h4>
+                <h2>${{ number_format($walletBalance) }}</h2>
+                <div class="stat-trend trend-up">
+                    <i class="ri-checkbox-circle-line"></i> Available Funds
+                </div>
+            </div>
+            <div class="hover-circle"></div>
+        </div>
+
         <!-- Add Employee Card -->
-        <a href="{{ route('staff.add_employee') }}" class="stat-card h-slide-up" style="animation-delay: 0.2s;">
+        <a href="{{ route('staff.add_employee') }}" class="stat-card h-slide-up" style="animation-delay: 0.3s;">
             <div class="stat-icon-wrapper gold-glow">
                 <i class="ri-user-add-line"></i>
             </div>
@@ -50,7 +65,7 @@
         </a>
 
          <!-- Change Password Card (Clickable Widget) -->
-         <a href="{{ route('admin.change.password') }}" class="stat-card h-slide-up security-card" style="animation-delay: 0.3s;">
+         <a href="{{ route('admin.change.password') }}" class="stat-card h-slide-up security-card" style="animation-delay: 0.4s;">
             <div class="stat-icon-wrapper red-glow">
                 <i class="ri-shield-keyhole-line"></i>
             </div>
@@ -70,7 +85,7 @@
     <div class="dashboard-grid">
         
         <!-- Recent Shortcuts -->
-        <div class="grid-card h-slide-up" style="animation-delay: 0.4s;">
+        <div class="grid-card h-slide-up" style="animation-delay: 0.5s;">
             <div class="card-header">
                 <h3><i class="ri-flashlight-line"></i> Quick Access</h3>
             </div>
@@ -97,9 +112,6 @@
 
 </div>
 </div>
-
-
-
 
 <script>
     // Live Clock Script
@@ -226,6 +238,7 @@
 .blue-glow { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
 .gold-glow { background: rgba(212, 175, 55, 0.1); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.2); }
 .red-glow { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+.green-glow { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
 
 .stat-info h4 { color: #6b7280; font-size: 12px; text-transform: uppercase; margin-bottom: 4px; }
 .stat-info h2 { color: #222; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
@@ -321,4 +334,9 @@
     .dashboard-grid { grid-template-columns: 1fr; }
     .welcome-banner { flex-direction: column; align-items: flex-start; gap: 20px; }
     .current-time { text-align: left; }
+<<<<<<< HEAD
 }
+=======
+}
+</style>
+>>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
