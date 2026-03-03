@@ -1,4 +1,3 @@
-s
 <!DOCTYPE html>
 <html lang="en">
 
@@ -289,126 +288,219 @@ s
 
 <body>
 
-    <!-- Mobile Overlay -->
-    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <<<<<<< HEAD
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-        <div class="brand-box">
-            <img style="width: 150px;" src="{{ asset('assets/image/logo.png') }}" alt="Planora">
-        </div>
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand-box">
+                <img style="width: 150px;" src="{{ asset('assets/image/logo.png') }}" alt="Planora">
+            </div>
 
-        <ul class="sidebar-menu">
+            <ul class="sidebar-menu">
 
-            <!-- DASHBOARD START -->
+                <!-- DASHBOARD START -->
 
-            <li class="menu-item">
-                <a href="{{ route('staff.dashboard') }}" class="menu-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
-                    <div class="link-content">
-                        <i class="ri-dashboard-3-line menu-icon"></i>
-                        <span>Dashboard</span>
-                    </div>
-                </a>
-            </li>
-
-            <<<<<<< HEAD
-
-                <!-- DASHBOARD END -->
-                =======
-                <li class="menu-item has-submenu {{ request()->routeIs('staff.add_employee') || request()->routeIs('staff.employee_list') ? 'open' : '' }}">
-                    <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                <li class="menu-item">
+                    <a href="{{ route('staff.dashboard') }}" class="menu-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
                         <div class="link-content">
-                            <i class="ri-user-star-line menu-icon"></i>
-                            <span>Employee Mgmt</span>
+                            <i class="ri-dashboard-3-line menu-icon"></i>
+                            <span>Dashboard</span>
                         </div>
-                        <i class="ri-arrow-down-s-line arrow-icon"></i>
                     </a>
-                    <ul class="submenu">
-
-                        <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
-                        <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a></li>
-
-
-                    </ul>
                 </li>
-
-                <li class="menu-item has-submenu {{ request()->routeIs('accounts.request_form') || request()->routeIs('accounts.request_list') ? 'open' : '' }}">
-                    <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
-                        <div class="link-content">
-                            <i class="ri-briefcase-4-line menu-icon"></i>
-                            <span>Id Activation Mgmt</span>
-                        </div>
-                        <i class="ri-arrow-down-s-line arrow-icon"></i>
-                    </a>
-                    <ul class="submenu">
-
-                        @if(Session('admin_id')==1)
-                        <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                        <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Pending List</a></li>
-                        <li><a href="{{route('accounts.approve_list')}}" class="{{ request()->routeIs('accounts.approve_list') ? 'active' : '' }}">Approved List</a></li>
-                        <li><a href="{{route('accounts.reject_list')}}" class="{{ request()->routeIs('accounts.reject_list') ? 'active' : '' }}">Rejected List</a></li>
-
-                        @endif
-                        @if(Session('admin_id')==2)
-
-                        <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                        <li><a href="{{route('accounts.request_list_sub')}}" class="{{ request()->routeIs('accounts.request_list_sub') ? 'active' : '' }}">Pending List</a></li>
-                        <li><a href="{{route('accounts.approve_list_sub')}}" class="{{ request()->routeIs('accounts.approve_list_sub') ? 'active' : '' }}">Approved List</a></li>
-                        <li><a href="{{route('accounts.reject_list_sub')}}" class="{{ request()->routeIs('accounts.reject_list_sub') ? 'active' : '' }}">Rejected List</a></li>
-
-                        @endif
-                        @if(Session('admin_id')!=2 && Session('admin_id')!=1)
-
-
-                        <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
-                        <li><a href="{{route('accounts.request_list_user')}}" class="{{ request()->routeIs('accounts.request_list_user') ? 'active' : '' }}">Pending List</a></li>
-                        <li><a href="{{route('accounts.approve_list_user')}}" class="{{ request()->routeIs('accounts.approve_list_user') ? 'active' : '' }}">Approved List</a></li>
-                        <li><a href="{{route('accounts.reject_list_user')}}" class="{{ request()->routeIs('accounts.reject_list_user') ? 'active' : '' }}">Rejected List</a></li>
-
-
-                        @endif
-
-                    </ul>
-                </li>
-                >>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
-
 
                 <<<<<<< HEAD
-                    <!-- DEPARTMENT MANAGEMENT START -->
+
+                    <!-- DASHBOARD END -->
                     =======
-                    <li class="menu-item has-submenu {{ request()->routeIs('accounts.wallet_request_form') || request()->routeIs('accounts.wallet_request_list') ? 'open' : '' }}">
+                    <li class="menu-item has-submenu {{ request()->routeIs('staff.add_employee') || request()->routeIs('staff.employee_list') ? 'open' : '' }}">
                         <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                             <div class="link-content">
-                                <i class="ri-wallet-3-line menu-icon"></i>
-                                <span>Amount Requests</span>
+                                <i class="ri-user-star-line menu-icon"></i>
+                                <span>Employee Mgmt</span>
                             </div>
                             <i class="ri-arrow-down-s-line arrow-icon"></i>
                         </a>
                         <ul class="submenu">
-                            <li><a href="{{route('accounts.wallet_request_form')}}" class="{{ request()->routeIs('accounts.wallet_request_form') ? 'active' : '' }}">Amount Request Form</a></li>
+
+                            <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
+                            <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="menu-item has-submenu {{ request()->routeIs('accounts.request_form') || request()->routeIs('accounts.request_list') ? 'open' : '' }}">
+                        <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                            <div class="link-content">
+                                <i class="ri-briefcase-4-line menu-icon"></i>
+                                <span>Id Activation Mgmt</span>
+                            </div>
+                            <i class="ri-arrow-down-s-line arrow-icon"></i>
+                        </a>
+                        <ul class="submenu">
 
                             @if(Session('admin_id')==1)
-                            <li><a href="{{route('accounts.wallet_request_list_super')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
-                            <li><a href="{{route('accounts.wallet_approve_list_super')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_super') ? 'active' : '' }}">Approved List</a></li>
-                            <li><a href="{{route('accounts.wallet_reject_list_super')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_super') ? 'active' : '' }}">Rejected List</a></li>
+                            <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
+                            <li><a href="{{route('accounts.request_list')}}" class="{{ request()->routeIs('accounts.request_list') ? 'active' : '' }}">Pending List</a></li>
+                            <li><a href="{{route('accounts.approve_list')}}" class="{{ request()->routeIs('accounts.approve_list') ? 'active' : '' }}">Approved List</a></li>
+                            <li><a href="{{route('accounts.reject_list')}}" class="{{ request()->routeIs('accounts.reject_list') ? 'active' : '' }}">Rejected List</a></li>
 
                             @endif
                             @if(Session('admin_id')==2)
 
-                            <li><a href="{{route('accounts.wallet_request_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
-                            <li><a href="{{route('accounts.wallet_approve_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_admin') ? 'active' : '' }}">Approved List</a></li>
-                            <li><a href="{{route('accounts.wallet_reject_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_admin') ? 'active' : '' }}">Rejected List</a></li>
+                            <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
+                            <li><a href="{{route('accounts.request_list_sub')}}" class="{{ request()->routeIs('accounts.request_list_sub') ? 'active' : '' }}">Pending List</a></li>
+                            <li><a href="{{route('accounts.approve_list_sub')}}" class="{{ request()->routeIs('accounts.approve_list_sub') ? 'active' : '' }}">Approved List</a></li>
+                            <li><a href="{{route('accounts.reject_list_sub')}}" class="{{ request()->routeIs('accounts.reject_list_sub') ? 'active' : '' }}">Rejected List</a></li>
 
                             @endif
                             @if(Session('admin_id')!=2 && Session('admin_id')!=1)
 
-                            <li><a href="{{route('accounts.wallet_request_list')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
-                            <li><a href="{{route('accounts.wallet_approve_list')}}" class="{{ request()->routeIs('accounts.wallet_approve_list') ? 'active' : '' }}">Approved List</a></li>
-                            <li><a href="{{route('accounts.wallet_reject_list')}}" class="{{ request()->routeIs('accounts.wallet_reject_list') ? 'active' : '' }}">Rejected List</a></li>
+
+                            <li><a href="{{route('accounts.request_form')}}" class="{{ request()->routeIs('accounts.request_form') ? 'active' : '' }}">Request Form</a></li>
+                            <li><a href="{{route('accounts.request_list_user')}}" class="{{ request()->routeIs('accounts.request_list_user') ? 'active' : '' }}">Pending List</a></li>
+                            <li><a href="{{route('accounts.approve_list_user')}}" class="{{ request()->routeIs('accounts.approve_list_user') ? 'active' : '' }}">Approved List</a></li>
+                            <li><a href="{{route('accounts.reject_list_user')}}" class="{{ request()->routeIs('accounts.reject_list_user') ? 'active' : '' }}">Rejected List</a></li>
+
+
                             @endif
+
                         </ul>
                     </li>
                     >>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
+
+
+                    <<<<<<< HEAD
+                        <!-- DEPARTMENT MANAGEMENT START -->
+                        =======
+                        <li class="menu-item has-submenu {{ request()->routeIs('accounts.wallet_request_form') || request()->routeIs('accounts.wallet_request_list') ? 'open' : '' }}">
+                            <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                                <div class="link-content">
+                                    <i class="ri-wallet-3-line menu-icon"></i>
+                                    <span>Amount Requests</span>
+                                </div>
+                                <i class="ri-arrow-down-s-line arrow-icon"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="{{route('accounts.wallet_request_form')}}" class="{{ request()->routeIs('accounts.wallet_request_form') ? 'active' : '' }}">Amount Request Form</a></li>
+
+                                @if(Session('admin_id')==1)
+                                <li><a href="{{route('accounts.wallet_request_list_super')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
+                                <li><a href="{{route('accounts.wallet_approve_list_super')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_super') ? 'active' : '' }}">Approved List</a></li>
+                                <li><a href="{{route('accounts.wallet_reject_list_super')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_super') ? 'active' : '' }}">Rejected List</a></li>
+
+                                @endif
+                                @if(Session('admin_id')==2)
+
+                                <li><a href="{{route('accounts.wallet_request_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
+                                <li><a href="{{route('accounts.wallet_approve_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_approve_list_admin') ? 'active' : '' }}">Approved List</a></li>
+                                <li><a href="{{route('accounts.wallet_reject_list_admin')}}" class="{{ request()->routeIs('accounts.wallet_reject_list_admin') ? 'active' : '' }}">Rejected List</a></li>
+
+                                @endif
+                                @if(Session('admin_id')!=2 && Session('admin_id')!=1)
+
+                                <li><a href="{{route('accounts.wallet_request_list')}}" class="{{ request()->routeIs('accounts.wallet_request_list') ? 'active' : '' }}">Pending Request List</a></li>
+                                <li><a href="{{route('accounts.wallet_approve_list')}}" class="{{ request()->routeIs('accounts.wallet_approve_list') ? 'active' : '' }}">Approved List</a></li>
+                                <li><a href="{{route('accounts.wallet_reject_list')}}" class="{{ request()->routeIs('accounts.wallet_reject_list') ? 'active' : '' }}">Rejected List</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                        >>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
+
+
+                        <li class="menu-item">
+                            <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                                <div class="link-content">
+                                    <i class="ri-user-star-line menu-icon"></i>
+                                    <span>Role Mgmt</span>
+                                </div>
+                                <i class="ri-arrow-down-s-line arrow-icon"></i>
+                            </a>
+                            <ul class="submenu">
+
+                                <li><a href="{{route('staff.add_department')}}">Add Role</a></li>
+                                <li><a href="{{ route('staff.department_list') }}">Role List</a></li>
+
+
+                            </ul>
+                        </li>
+
+                        <!-- DEPARTMENT MANAGEMENT END -->
+
+
+                        <!-- EMPLOYEE MANAGEMENT START -->
+
+                        <li class="menu-item has-submenu {{ request()->routeIs('staff.add_employee') || request()->routeIs('staff.employee_list') ? 'open' : '' }}">
+                            <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                                <div class="link-content">
+                                    <i class="ri-user-star-line menu-icon"></i>
+                                    <span>Employee Mgmt</span>
+                                </div>
+                                <i class="ri-arrow-down-s-line arrow-icon"></i>
+                            </a>
+                            <ul class="submenu">
+
+                                <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
+                                <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a></li>
+
+
+                            </ul>
+                        </li>
+
+
+                        <!-- EMPLOYEE MANAGEMENT END -->
+
+
+                        <!-- PROJECT MANAGEMENT START -->
+
+                        <li class="menu-item has-submenu {{ request()->routeIs('staff.add_projects') || request()->routeIs('staff.add_projects') ? 'open' : '' }}">
+                            <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                                <div class="link-content">
+                                    <i class="ri-user-star-line menu-icon"></i>
+                                    <span>Project Mgmt</span>
+                                </div>
+                                <i class="ri-arrow-down-s-line arrow-icon"></i>
+                            </a>
+                            <ul class="submenu">
+
+                                <li><a href="{{route('staff.add_projects')}}" class="{{ request()->routeIs('staff.add_projects') ? 'active' : '' }}">Add Project</a></li>
+                                {{-- <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a>
+                        </li> --}}
+
+
+            </ul>
+            </li>
+            =======
+            <!-- Mobile Overlay -->
+            <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar" id="sidebar">
+                <div class="brand-box">
+                    <img style="width: 150px;" src="{{ asset('assets/image/logo.png') }}" alt="Planora">
+                </div>
+
+                <ul class="sidebar-menu">
+
+                    <!-- DASHBOARD START -->
+
+                    <li class="menu-item">
+                        <a href="{{ route('staff.dashboard') }}" class="menu-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
+                            <div class="link-content">
+                                <i class="ri-dashboard-3-line menu-icon"></i>
+                                <span>Dashboard</span>
+                            </div>
+                        </a>
+                    </li>
+
+
+                    <!-- DASHBOARD END -->
+
+
+                    <!-- DEPARTMENT MANAGEMENT START -->
 
 
                     <li class="menu-item">
@@ -471,100 +563,178 @@ s
                     </li> --}}
 
 
-        </ul>
-        </li>
+                </ul>
+                </li>
+                >>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
 
 
-        <!-- PROJECT MANAGEMENT END -->
+                <!-- PROJECT MANAGEMENT END -->
+
+                <<<<<<< HEAD=======>>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
+
+                    <!-- LOGOUT START -->
+                    <li style="border-top: 1px solid var(--border-color); margin: 15px 0;"></li>
+
+                    <li class="menu-item">
+                        <a href="{{ route('admin.logout') }}" class="menu-link" style="color: #ff5b5b;">
+                            <div class="link-content">
+                                <i class="ri-logout-box-r-line menu-icon"></i>
+                                <span>Logout</span>
+                            </div>
+                        </a>
+                    </li>
 
 
+                    <!-- LOGOUT END -->
 
-        <!-- LOGOUT START -->
-        <li style="border-top: 1px solid var(--border-color); margin: 15px 0;"></li>
+                    <<<<<<< HEAD
+                        </ul>
+            </aside>
 
-        <li class="menu-item">
-            <a href="{{ route('admin.logout') }}" class="menu-link" style="color: #ff5b5b;">
-                <div class="link-content">
-                    <i class="ri-logout-box-r-line menu-icon"></i>
-                    <span>Logout</span>
+            <!-- HEADER -->
+            <div class="header">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <i class="ri-menu-2-line toggle-btn" onclick="toggleSidebar()"></i>
+                    <div class="header-title">
+                        <h3>Admin Overview</h3>
+                    </div>
                 </div>
-            </a>
-        </li>
 
-
-        <!-- LOGOUT END -->
-
-        </ul>
-    </aside>
-
-    <!-- HEADER -->
-    <div class="header">
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <i class="ri-menu-2-line toggle-btn" onclick="toggleSidebar()"></i>
-            <div class="header-title">
-                <h3>Admin Overview</h3>
+                <div class="admin-info">
+                    <i class="ri-shield-user-line"></i>
+                    <span>Welcome, Admin</span>
+                </div>
             </div>
-        </div>
-
-        <div class="admin-info">
-            <i class="ri-shield-user-line"></i>
-            <span>Welcome, Admin</span>
-        </div>
-    </div>
 
 
 
-    <script>
-        // Submenu Toggle
-        function toggleSubmenu(element) {
-            const parent = element.parentElement;
-            const wasOpen = parent.classList.contains('open');
+            <script>
+                // Submenu Toggle
+                function toggleSubmenu(element) {
+                    const parent = element.parentElement;
+                    const wasOpen = parent.classList.contains('open');
 
-            // Close all other open submenus
-            document.querySelectorAll('.menu-item.has-submenu').forEach(item => {
-                item.classList.remove('open');
-            });
+                    // Close all other open submenus
+                    document.querySelectorAll('.menu-item.has-submenu').forEach(item => {
+                        item.classList.remove('open');
+                    });
 
-            // Toggle current
-            if (!wasOpen) {
-                parent.classList.add('open');
-            }
-        }
+                    // Toggle current
+                    if (!wasOpen) {
+                        parent.classList.add('open');
+                    }
+                }
 
-        // Sidebar Mobile Toggle
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.querySelector('.sidebar-overlay');
+                // Sidebar Mobile Toggle
+                function toggleSidebar() {
+                    const sidebar = document.getElementById('sidebar');
+                    const overlay = document.querySelector('.sidebar-overlay');
 
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-    </script>
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                }
+            </script>
 
 
-    <style>
-        .content-wrapper {
-            max-width: 100% !important;
-        }
+            <style>
+                .content-wrapper {
+                    max-width: 100% !important;
+                }
 
-        a.btn-reject.reject-btn,
-        a.btn-approve.reject-btn {
-            background: rgba(231, 76, 60, 0.2) !important;
-            color: #e74c3c !important;
-            border: 1px solid rgba(231, 76, 60, 0.3) !important;
-            height: 36px;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 0px 10px !important;
-        }
+                a.btn-reject.reject-btn,
+                a.btn-approve.reject-btn {
+                    background: rgba(231, 76, 60, 0.2) !important;
+                    color: #e74c3c !important;
+                    border: 1px solid rgba(231, 76, 60, 0.3) !important;
+                    height: 36px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    margin: 0px 10px !important;
+                }
 
-        table.dataTable tbody th,
-        table.dataTable tbody td {
-            padding: 18px 10px !important;
-            white-space: nowrap;
-        }
-    </style>
+                table.dataTable tbody th,
+                table.dataTable tbody td {
+                    padding: 18px 10px !important;
+                    white-space: nowrap;
+                }
+            </style>
 
 </body>
 
 </html>
+=======
+</ul>
+</aside>
+
+<!-- HEADER -->
+<div class="header">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <i class="ri-menu-2-line toggle-btn" onclick="toggleSidebar()"></i>
+        <div class="header-title">
+            <h3>Admin Overview</h3>
+        </div>
+    </div>
+
+    <div class="admin-info">
+        <i class="ri-shield-user-line"></i>
+        <span>Welcome, Admin</span>
+    </div>
+</div>
+
+
+
+<script>
+    // Submenu Toggle
+    function toggleSubmenu(element) {
+        const parent = element.parentElement;
+        const wasOpen = parent.classList.contains('open');
+
+        // Close all other open submenus
+        document.querySelectorAll('.menu-item.has-submenu').forEach(item => {
+            item.classList.remove('open');
+        });
+
+        // Toggle current
+        if (!wasOpen) {
+            parent.classList.add('open');
+        }
+    }
+
+    // Sidebar Mobile Toggle
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+</script>
+
+
+<style>
+    .content-wrapper {
+        max-width: 100% !important;
+    }
+
+    a.btn-reject.reject-btn,
+    a.btn-approve.reject-btn {
+        background: rgba(231, 76, 60, 0.2) !important;
+        color: #e74c3c !important;
+        border: 1px solid rgba(231, 76, 60, 0.3) !important;
+        height: 36px;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0px 10px !important;
+    }
+
+    table.dataTable tbody th,
+    table.dataTable tbody td {
+        padding: 18px 10px !important;
+        white-space: nowrap;
+    }
+</style>
+
+</body>
+
+</html>
+>>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda

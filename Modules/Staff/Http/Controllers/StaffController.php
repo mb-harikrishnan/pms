@@ -17,10 +17,14 @@ class StaffController extends Controller
 
 
 
+
+
     public function dashboard()
     {
+        $userid = session('admin_id');
 
         $employeeCount = Employee::count();
+
 
         return view('staff::dashboard', compact('employeeCount'));
     }

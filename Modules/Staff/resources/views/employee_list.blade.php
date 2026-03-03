@@ -11,6 +11,9 @@
       <table class="employee-table"  id="myTable">
         <thead>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
             <tr>
               <th>ID</th>
               <th>Full Name</th>
@@ -20,6 +23,7 @@
               <th>UserName</th>
               <th>Edit</th>
               <th>Remove</th>
+<<<<<<< HEAD
 =======
           <tr>
             <th>ID</th>
@@ -42,6 +46,8 @@
               <td>{{ $employee->C_ROLE }}</td>
               <td>{{ $employee->C_USERNAME }}</td>
 >>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
+=======
+>>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
             </tr>
           </thead>
           <tbody>
