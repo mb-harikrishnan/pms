@@ -6,11 +6,7 @@
 
     <!-- Page Header -->
     <div class="page-header">
-<<<<<<< HEAD:Modules/Staff/resources/views/add_department.blade.php
       <h2>Add New Department</h2>
-=======
-      <h2>Amount Request</h2>
->>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4:Modules/Accounts/resources/views/wallet_request_form.blade.php
     </div>
 
     <!-- Form Card -->
