@@ -5,7 +5,12 @@
   <div class="content-wrapper">
 
     <div class="page-header">
-      <h2>Department List</h2>
+      <h2>Role List</h2>
+
+       <a href="{{ route('staff.add_department') }}" class="btn btn-primary">
+        Add Role
+      </a>
+
     </div>
 
     <div class="table-card">
@@ -13,7 +18,7 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Department</th>
+            <th>Role</th>
             <th>CODE</th>
             <th>DESCRIPTION</th>
             <th>ACTION</th>
@@ -95,8 +100,12 @@
 /* Page Header */
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Changed Gold to Red */
+  border-left: 4px solid #dc2626;
   padding-left: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-header h2 {
@@ -218,6 +227,24 @@
   .table-card { padding: 15px; overflow-x: scroll; }
   
   .employee-table th, .employee-table td { padding: 12px 10px; font-size: 13px; }
+}
+
+/* Button Styles */
+.btn-primary{
+    background:#dc2626;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    color:#ffffff;
+    text-decoration:none; /* remove underline */
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+    color:#ffffff;
+    text-decoration:none; /* keep underline removed on hover */
 }
 </style>
 

@@ -7,6 +7,10 @@
     <!-- Page Header -->
     <div class="page-header">
       <h2>Add New Employee</h2>
+
+      <a href="{{ route('staff.employee_list') }}" class="btn btn-primary">
+         Employee List
+      </a>
     </div>
 
     <!-- Form Card -->
@@ -111,9 +115,14 @@
 
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Red */
+  border-left: 4px solid #dc2626;
   padding-left: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 
 .page-header h2 {
   font-family: 'Cinzel', serif;
@@ -327,6 +336,25 @@
 .select2-results__option--highlighted {
     background-color: #dc2626 !important;
     color: #ffffff !important;
+}
+
+
+/* Button Styles */
+.btn-primary{
+    background:#dc2626;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    color:#ffffff;
+    text-decoration:none; /* remove underline */
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+    color:#ffffff;
+    text-decoration:none; /* keep underline removed on hover */
 }
 
 </style>

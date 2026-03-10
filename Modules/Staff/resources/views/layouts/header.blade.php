@@ -348,8 +348,8 @@ $menus = DB::table('menu')
                         </a>
 
                         <ul class="submenu">
-                            <li><a href="{{route('staff.add_department')}}">Add Role</a></li>
-                            <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
+                            <li><a href="{{route('staff.department_list')}}">Role List</a></li>
+                            <li><a href="{{route('staff.employee_list')}}">Employee List</a></li>
                         </ul>
 
                     </li>

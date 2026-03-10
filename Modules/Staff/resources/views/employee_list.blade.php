@@ -5,15 +5,15 @@
 
     <div class="page-header">
       <h2>Employee List</h2>
+      <a href="{{ route('staff.add_employee') }}" class="btn btn-primary">
+        Add Employee 
+      </a>
     </div>
 
     <div class="table-card">
       <table class="employee-table"  id="myTable">
         <thead>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
+
             <tr>
               <th>ID</th>
               <th>Full Name</th>
@@ -23,15 +23,7 @@
               <th>UserName</th>
               <th>Edit</th>
               <th>Remove</th>
-<<<<<<< HEAD
-=======
-          <tr>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Role</th>
-            <th>UserName</th>
+
           </tr>
         </thead>
         <tbody>
@@ -45,49 +37,34 @@
               <td>{{ $employee->N_MOBILE }}</td>
               <td>{{ $employee->C_ROLE }}</td>
               <td>{{ $employee->C_USERNAME }}</td>
->>>>>>> ce45a22b41c79b2a3862cac8f66c21cf47a716f4
-=======
->>>>>>> 5892266ec50eacff06e951c3d6d0cbb255de3dda
-            </tr>
-          </thead>
-          <tbody>
-              
-            @foreach($employees as $employee)
-            
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $employee->C_FNAME }}</td>
-                <td>{{ $employee->C_EMAIL }}</td>
-                <td>{{ $employee->N_MOBILE }}</td>
-                <td>{{ $employee->department_name }}</td>
-                <td>{{ $employee->C_USERNAME }}</td>
 
 
-                 <!-- EDIT BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.edit_employee', $employee->n_slno) }}" 
-                        class="btn-edit">
-                          Edit
-                      </a>
-                  </td>
+             <!-- EDIT BUTTON -->
+              <td>
+                  <a href="{{ route('staff.edit_employee', $employee->n_slno) }}" 
+                    class="btn-edit">
+                        Edit
+                    </a>
+              </td>
 
-                  <!-- DELETE BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.delete_employee_id', $employee->n_slno) }}"
-                        class="btn-remove"
-                            onclick="return confirmDelete(event)">
-                                Delete
-                        </a>
-                  </td>
-              </tr>
-              
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+              <!-- DELETE BUTTON -->
+              <td>
+                  <a href="{{ route('staff.delete_employee_id', $employee->n_slno) }}"
+                    class="btn-remove"
+                        onclick="return confirmDelete(event)">
+                            Delete
+                    </a>
+              </td>
+          </tr>
+          
+        @endforeach
+      </tbody>
+    </table>
+  </div>
 
-    </div>
-  </main>
+</main>
+
+
 
 
 
@@ -150,8 +127,12 @@ border-left: 4px solid #f97316;
 /* Page Header */
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Changed Gold to Red */
+  border-left: 4px solid #dc2626;
   padding-left: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-header h2 {
@@ -273,6 +254,24 @@ border-left: 4px solid #f97316;
   .table-card { padding: 15px; overflow-x: scroll; }
   
   .employee-table th, .employee-table td { padding: 12px 10px; font-size: 13px; }
+}
+
+/* Button Styles */
+.btn-primary{
+    background:#dc2626;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    color:#ffffff;
+    text-decoration:none; /* remove underline */
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+    color:#ffffff;
+    text-decoration:none; /* keep underline removed on hover */
 }
 </style>
 

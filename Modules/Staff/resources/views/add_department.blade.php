@@ -6,7 +6,11 @@
 
     <!-- Page Header -->
     <div class="page-header">
-      <h2>Add New Department</h2>
+      <h2>Add New Role</h2>
+
+      <a href="{{ route('staff.department_list') }}" class="btn btn-primary">
+        Role List
+      </a>
     </div>
 
     <!-- Form Card -->
@@ -16,7 +20,7 @@
 
   <div class="form-row">
     <div class="form-group">
-      <label>Department Name <span style="color:red">*</span></label>
+      <label>Role Name <span style="color:red">*</span></label>
       <input type="text" name="department_name" placeholder="Enter department name">
       @error('department_name')
         <small class="error-text">{{ $message }}</small>
@@ -24,22 +28,14 @@
     </div>
 
     <div class="form-group">
-      <label>Department Code <span style="color:red">*</span></label>
+      <label>Role Code <span style="color:red">*</span></label>
       <input type="text" name="department_code" placeholder="Enter department code">
       @error('department_code')
         <small class="error-text">{{ $message }}</small>
       @enderror
     </div>
 
-       {{-- <div class="form-group">
-          <label>Select Date</label>
-          <input type="date" name="date" class="form-control" value="{{ old('date', date('Y-m-d')) }}">
-
-          
-          @error('date')
-              <small class="error-text">{{ $message }}</small>
-          @enderror
-      </div> --}}
+    
 
   </div>
 
@@ -85,8 +81,12 @@
 
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Red */
+  border-left: 4px solid #dc2626;
   padding-left: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-header h2 {
@@ -247,6 +247,26 @@
     grid-template-columns: 1fr; /* Stack inputs on mobile */
     gap: 15px;
   }
+}
+
+
+
+/* Button Styles */
+.btn-primary{
+    background:#dc2626;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    color:#ffffff;
+    text-decoration:none; /* remove underline */
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+    color:#ffffff;
+    text-decoration:none; /* keep underline removed on hover */
 }
 
 
