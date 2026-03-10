@@ -28,6 +28,7 @@ public function get_project_parent(Request $request)
 
     $departments = DB::table('pms_project_details')
         ->where('c_status', 'Y')
+        ->where('parent_id', 0)
         ->when($search, function ($query, $search) {
             return $query->where('c_project_name', 'like', '%' . $search . '%');
         })
@@ -75,15 +76,31 @@ public function save_project(Request $request)
 
 
 
-  public function project_list()
-{
-    $employees = DB::table('pms_project_details as e')
-        ->join('pms_project_details as d', 'e.n_pjt_id', '=', 'd.c_parent_id')
-        ->where('e.c_status', 'Y')
-        ->select('e.*', 'd.c_project_name as name')
-        ->get();
+//   public function project_list()
+// {
+//     $projects = DB::table('pms_project_details as e')
+//         ->join('pms_project_details as d', 'e.n_pjt_id', '=', 'd.parent_id')
+//         ->where('e.c_status', 'Y')
+//         ->select('e.*', 'd.c_project_name as name')
+//         ->get();
 
-    return view('staff::projects::project_list', compact('projects'));
+//     return view('staff::projects.project_list', compact('projects'));
+// }
+
+
+public function project_list()
+{
+        $projects = DB::table('pms_project_details')
+                    ->where('parent_id',0)
+                    ->get();
+
+        foreach ($projects as $project) {
+            $project->children = DB::table('pms_project_details')
+                            ->where('parent_id',$project->n_pjt_id)
+                            ->get();
+        }
+
+    return view('staff::projects.project_list', compact('projects'));
 }
 
 

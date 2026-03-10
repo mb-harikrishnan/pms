@@ -372,11 +372,9 @@ $menus = DB::table('menu')
                     </a>
 
                     <ul class="submenu">
-                        <li>
-                            <a href="{{route('staff.add_projects')}}" class="{{ request()->routeIs('staff.add_projects') ? 'active' : '' }}">
-                                Add Project
-                            </a>
-                        </li>
+                      
+
+                        <li><a href="{{route('staff.project_list')}}">Project List</a></li>
                     </ul>
 
                 </li>

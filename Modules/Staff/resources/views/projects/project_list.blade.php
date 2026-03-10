@@ -5,53 +5,35 @@
 
     <div class="page-header">
       <h2>Project List</h2>
+
+       <a href="{{ route('staff.add_projects') }}" class="btn btn-primary">
+        Add Project
+      </a>
     </div>
 
-    <div class="table-card">
-      <table class="employee-table"  id="myTable">
-        <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Parent </th>
-              <th>Edit</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody>
-              
-            @foreach($projects as $project)
-            
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $employee->c_project_name }}</td>
-                <td>{{ $employee->name }}</td>
-           
+     <table id="myTable" class="employee-table">
+<thead>
+<tr>
+<th></th>
+<th>ID</th>
+<th>Name</th>
+</tr>
+</thead>
 
+<tbody>
 
-                 <!-- EDIT BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.edit_employee', $employee->n_slno) }}" 
-                        class="btn-edit">
-                          Edit
-                      </a>
-                  </td>
+@foreach($projects as $project)
 
-                  <!-- DELETE BUTTON -->
-                  <td>
-                      <a href="{{ route('staff.delete_employee_id', $employee->n_slno) }}"
-                        class="btn-remove"
-                            onclick="return confirmDelete(event)">
-                                Delete
-                        </a>
-                  </td>
-              </tr>
-              
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+<tr data-children='@json($project->children)'>
+<td class="details-control">+</td>
+<td>{{ $project->n_pjt_id }}</td>
+<td>{{ $project->c_project_name }}</td>
+</tr>
 
+@endforeach
+
+</tbody>
+</table>
     </div>
   </main>
 
@@ -114,10 +96,15 @@ border-left: 4px solid #f97316;
 }
 
 /* Page Header */
+
 .page-header {
   margin-bottom: 30px;
-  border-left: 4px solid #dc2626; /* Changed Gold to Red */
+  border-left: 4px solid #dc2626;
   padding-left: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-header h2 {
@@ -240,6 +227,28 @@ border-left: 4px solid #f97316;
   
   .employee-table th, .employee-table td { padding: 12px 10px; font-size: 13px; }
 }
+
+
+
+
+/* Button Styles */
+.btn-primary{
+    background:#dc2626;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:14px;
+    color:#ffffff;
+    text-decoration:none; /* remove underline */
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+    color:#ffffff;
+    text-decoration:none; /* keep underline removed on hover */
+}
+
 </style>
 
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -274,4 +283,55 @@ function confirmDelete(event) {
         }
     });
 }
+</script>
+
+<script>
+$(document).ready(function(){
+
+var table = $('#myTable').DataTable();
+
+$('#myTable tbody').on('click','td.details-control',function(){
+
+var tr = $(this).closest('tr');
+var row = table.row(tr);
+
+if(row.child.isShown()){
+
+row.child.hide();
+tr.removeClass('shown');
+
+}else{
+
+var children = tr.data('children');
+
+var html = '<table border="1" width="100%">';
+html += '<thead><tr><th>ID</th><th>Name</th></tr></thead><tbody>';
+
+if(children.length > 0){
+
+children.forEach(function(child){
+
+html += '<tr>';
+html += '<td>'+child.n_pjt_id+'</td>';
+html += '<td>'+child.c_project_name+'</td>';
+html += '</tr>';
+
+});
+
+}else{
+
+html += '<tr><td colspan="2">No Sub Projects</td></tr>';
+
+}
+
+html += '</tbody></table>';
+
+row.child(html).show();
+tr.addClass('shown');
+
+}
+
+});
+
+});
 </script>
