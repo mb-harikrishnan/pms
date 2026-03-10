@@ -31,7 +31,7 @@
       @enderror
     </div>
 
-       <div class="form-group">
+       {{-- <div class="form-group">
           <label>Select Date</label>
           <input type="date" name="date" class="form-control" value="{{ old('date', date('Y-m-d')) }}">
 
@@ -39,7 +39,7 @@
           @error('date')
               <small class="error-text">{{ $message }}</small>
           @enderror
-      </div>
+      </div> --}}
 
   </div>
 

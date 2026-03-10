@@ -1,3 +1,12 @@
+@php
+$menus = DB::table('menu')
+            ->get();
+
+    
+
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -293,146 +302,106 @@
         <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
         <!-- SIDEBAR -->
+  
+
+ 
         <aside class="sidebar" id="sidebar">
             <div class="brand-box">
                 <img style="width: 150px;" src="{{ asset('assets/image/logo.png') }}" alt="Planora">
             </div>
 
-            <ul class="sidebar-menu">
 
-               
+       
+           <ul class="sidebar-menu">
 
-                        <li class="menu-item">
-                            <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
-                                <div class="link-content">
-                                    <i class="ri-user-star-line menu-icon"></i>
-                                    <span>Role Mgmt</span>
-                                </div>
-                                <i class="ri-arrow-down-s-line arrow-icon"></i>
-                            </a>
-                            <ul class="submenu">
-
-                                <li><a href="{{route('staff.add_department')}}">Add Role</a></li>
-                                <li><a href="{{ route('staff.department_list') }}">Role List</a></li>
-
-
-                            </ul>
-                        </li>
-
-                     
-
-            <!-- Mobile Overlay -->
-            <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
-
-            <!-- SIDEBAR -->
-            <aside class="sidebar" id="sidebar">
-                <div class="brand-box">
-                    <img style="width: 150px;" src="{{ asset('assets/image/logo.png') }}" alt="Planora">
-                </div>
-
-                <ul class="sidebar-menu">
+                @foreach($menus as $menu)
+                @php
+                    $c_display_name = $menu->c_display_name;
+                @endphp
 
                     <!-- DASHBOARD START -->
+                    @if($c_display_name == 'Dashboard')
 
                     <li class="menu-item">
                         <a href="{{ route('staff.dashboard') }}" class="menu-link {{ request()->routeIs('staff.dashboard') ? 'active' : '' }}">
                             <div class="link-content">
                                 <i class="ri-dashboard-3-line menu-icon"></i>
-                                <span>Dashboard</span>
+                                <span>{{ $c_display_name }}</span>
                             </div>
                         </a>
                     </li>
 
-
+                    @endif
                     <!-- DASHBOARD END -->
 
 
                     <!-- DEPARTMENT MANAGEMENT START -->
-
+                    @if($c_display_name == 'Employee & Roles')
 
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
                             <div class="link-content">
                                 <i class="ri-user-star-line menu-icon"></i>
-                                <span>Role Mgmt</span>
+                                <span>{{ $c_display_name }}</span>
                             </div>
                             <i class="ri-arrow-down-s-line arrow-icon"></i>
                         </a>
+
                         <ul class="submenu">
-
                             <li><a href="{{route('staff.add_department')}}">Add Role</a></li>
-                            <li><a href="{{ route('staff.department_list') }}">Role List</a></li>
-
-
+                            <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
                         </ul>
+
                     </li>
 
+                    @endif
                     <!-- DEPARTMENT MANAGEMENT END -->
 
-
-                    <!-- EMPLOYEE MANAGEMENT START -->
-
-                    <li class="menu-item has-submenu {{ request()->routeIs('staff.add_employee') || request()->routeIs('staff.employee_list') ? 'open' : '' }}">
-                        <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
-                            <div class="link-content">
-                                <i class="ri-user-star-line menu-icon"></i>
-                                <span>Employee Mgmt</span>
-                            </div>
-                            <i class="ri-arrow-down-s-line arrow-icon"></i>
-                        </a>
-                        <ul class="submenu">
-
-                            <li><a href="{{route('staff.add_employee')}}" class="{{ request()->routeIs('staff.add_employee') ? 'active' : '' }}">Add Employee</a></li>
-                            <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a></li>
+                @endforeach
 
 
-                        </ul>
-                    </li>
+                <!-- PROJECT MANAGEMENT START -->
 
+                <li class="menu-item has-submenu {{ request()->routeIs('staff.add_projects') || request()->routeIs('staff.add_projects') ? 'open' : '' }}">
+                    <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
+                        <div class="link-content">
+                            <i class="ri-user-star-line menu-icon"></i>
+                            <span>Project Mgmt</span>
+                        </div>
+                        <i class="ri-arrow-down-s-line arrow-icon"></i>
+                    </a>
 
-                    <!-- EMPLOYEE MANAGEMENT END -->
+                    <ul class="submenu">
+                        <li>
+                            <a href="{{route('staff.add_projects')}}" class="{{ request()->routeIs('staff.add_projects') ? 'active' : '' }}">
+                                Add Project
+                            </a>
+                        </li>
+                    </ul>
 
-
-                    <!-- PROJECT MANAGEMENT START -->
-
-                    <li class="menu-item has-submenu {{ request()->routeIs('staff.add_projects') || request()->routeIs('staff.add_projects') ? 'open' : '' }}">
-                        <a href="javascript:void(0)" class="menu-link" onclick="toggleSubmenu(this)">
-                            <div class="link-content">
-                                <i class="ri-user-star-line menu-icon"></i>
-                                <span>Project Mgmt</span>
-                            </div>
-                            <i class="ri-arrow-down-s-line arrow-icon"></i>
-                        </a>
-                        <ul class="submenu">
-
-                            <li><a href="{{route('staff.add_projects')}}" class="{{ request()->routeIs('staff.add_projects') ? 'active' : '' }}">Add Project</a></li>
-                            {{-- <li><a href="{{ route('staff.employee_list') }}" class="{{ request()->routeIs('staff.employee_list') ? 'active' : '' }}">Employee List</a>
-                    </li> --}}
-
-
-                </ul>
                 </li>
-
 
                 <!-- PROJECT MANAGEMENT END -->
 
 
-                    <!-- LOGOUT START -->
-                    <li style="border-top: 1px solid var(--border-color); margin: 15px 0;"></li>
+                <!-- LOGOUT START -->
 
-                    <li class="menu-item">
-                        <a href="{{ route('admin.logout') }}" class="menu-link" style="color: #ff5b5b;">
-                            <div class="link-content">
-                                <i class="ri-logout-box-r-line menu-icon"></i>
-                                <span>Logout</span>
-                            </div>
-                        </a>
-                    </li>
+                <li style="border-top: 1px solid var(--border-color); margin: 15px 0;"></li>
 
+                <li class="menu-item">
+                    <a href="{{ route('admin.logout') }}" class="menu-link" style="color: #ff5b5b;">
+                        <div class="link-content">
+                            <i class="ri-logout-box-r-line menu-icon"></i>
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                </li>
 
-                    <!-- LOGOUT END -->
+                <!-- LOGOUT END -->
 
-                        </ul>
+                </ul>
+
+                       
             </aside>
 
             <!-- HEADER -->
