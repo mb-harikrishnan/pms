@@ -86,6 +86,11 @@ Route::get('/staff/add_projects', [ProjectController::class, 'add_projects'])
     Route::get('/staff/project_list', [ProjectController::class, 'project_list'])
     ->name('staff.project_list');
 
+    Route::get('/staff/get_employees', [ProjectController::class, 'get_employees'])->name('staff.get_employees');
+    Route::get('/staff/get_roles', [ProjectController::class, 'get_roles'])->name('staff.get_roles');
+
+   Route::post('/staff/save-project-employee',[StaffController::class,'saveProjectEmployee'])->name('staff.save_project_employee');
+
     
 
 

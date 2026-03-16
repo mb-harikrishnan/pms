@@ -44,10 +44,37 @@ public function get_project_parent(Request $request)
         ];
     }
 
+
     return response()->json($data);
+    
 }
 
 
+
+
+public function get_roles()
+{
+    $roles = DB::table('pms_department_details')
+        ->where('c_status','Y')
+        ->select('n_dept_id','C_NAME')
+        ->get();
+
+    return response()->json($roles);
+}
+
+
+public function get_employees(Request $request)
+{
+    $role_id = $request->role_id;
+
+    $employees = DB::table('pms_employee_details')
+        ->where('c_status','Y')
+        ->where('C_ROLE',$role_id)
+        ->select('n_slno','C_FNAME')
+        ->get();
+
+    return response()->json($employees);
+}
 
 
 
@@ -101,6 +128,43 @@ public function project_list()
         }
 
     return view('staff::projects.project_list', compact('projects'));
+}
+
+
+public function saveProjectEmployee(Request $request)
+{
+
+$project_id = $request->project_id;
+$description = $request->description;
+$assignData = $request->assignData;
+
+
+/* update project description */
+
+DB::table('projects_team')
+->where('n_pjt_id',$project_id)
+->update([
+'c_description'=>$description
+]);
+
+
+/* insert employees */
+
+foreach($assignData as $row){
+
+DB::table('project_employee')->insert([
+
+'project_id'=>$project_id,
+'role_id'=>$row['role'],
+'employee_id'=>$row['employee'],
+'created_at'=>now()
+
+]);
+
+}
+
+return response()->json(['status'=>true]);
+
 }
 
 
